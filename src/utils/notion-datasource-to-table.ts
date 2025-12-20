@@ -25,7 +25,7 @@ type QueryDataSourcesResponse = {
  * Parses a single property from a Notion page property
  * Routes to the appropriate parser based on property type
  */
-function parseDataSourceProperty(
+export function parseDataSourceProperty(
   property: unknown
 ): string | number | boolean | null {
   if (!property || typeof property !== "object") {
@@ -81,28 +81,28 @@ function parseDataSourceProperty(
 }
 
 /**
- * Converts Notion data source response to TanStack Table format
+ * Generates column definitions from a Notion data source schema
  * @param schema - Data source schema from dataSources.retrieve()
- * @param queryResponse - Query results from dataSources.query()
- * @returns Object with columnDefs and data for TanStack Table
+ * @returns Array of column definitions for TanStack Table
  */
-export function datasourceToTable(
-  schema: DataSourceObjectResponse,
-  queryResponse: QueryDataSourcesResponse
-): {
-  columnDefs: ColumnDef<Record<string, unknown>>[]
-  data: Record<string, unknown>[]
-} {
-  // Extract column definitions from schema properties
-  const columnDefs: ColumnDef<Record<string, unknown>>[] = Object.entries(
-    schema.properties
-  ).map(([key, property]) => ({
+export function schemaToColumnDefs(
+  schema: DataSourceObjectResponse
+): ColumnDef<Record<string, unknown>>[] {
+  return Object.entries(schema.properties).map(([key, property]) => ({
     accessorKey: key,
     header: property.name,
   }))
+}
 
-  // Transform query results into flat objects
-  const data: Record<string, unknown>[] = queryResponse.results.map((page) => {
+/**
+ * Parses Notion page results into flat data objects
+ * @param results - Array of page results from dataSources.query()
+ * @returns Array of parsed data objects
+ */
+export function parseDataSourceData(
+  results: Array<PageObjectResponse | PartialPageObjectResponse>
+): Record<string, unknown>[] {
+  return results.map((page) => {
     const rowData: Record<string, unknown> = {}
 
     // Only process PageObjectResponse (full pages), skip partial responses
@@ -115,6 +115,23 @@ export function datasourceToTable(
 
     return rowData
   })
+}
+
+/**
+ * Converts Notion data source response to TanStack Table format
+ * @param schema - Data source schema from dataSources.retrieve()
+ * @param queryResponse - Query results from dataSources.query()
+ * @returns Object with columnDefs and data for TanStack Table
+ */
+export function datasourceToTable(
+  schema: DataSourceObjectResponse,
+  queryResponse: QueryDataSourcesResponse
+): {
+  columnDefs: ColumnDef<Record<string, unknown>>[]
+  data: Record<string, unknown>[]
+} {
+  const columnDefs = schemaToColumnDefs(schema)
+  const data = parseDataSourceData(queryResponse.results)
 
   return { columnDefs, data }
 }

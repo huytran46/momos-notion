@@ -2,7 +2,7 @@ import { Client } from "@notionhq/client"
 import type { DataSourceObjectResponse } from "@notionhq/client/build/src/api-endpoints"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
-import { schemaToColumnDefs } from "@/utils/notion-datasource-to-table"
+import { datasourceToTable } from "@/utils/notion-datasource-to-table"
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,8 +20,10 @@ export async function GET(request: NextRequest) {
       auth: notionKey,
     })
 
-    // Get datasourceId from path parameter
-    const datasourceId = request.nextUrl.pathname.split("/").pop()
+    // Get datasourceId from query parameters
+    const { searchParams } = new URL(request.url)
+    const datasourceId = searchParams.get("datasourceId")
+
     if (!datasourceId) {
       return NextResponse.json(
         { error: "datasourceId is required" },
@@ -31,9 +33,14 @@ export async function GET(request: NextRequest) {
 
     try {
       // Get database schema
-      const schemaResponse = await notion.dataSources.retrieve({
-        data_source_id: datasourceId,
-      })
+      const [schemaResponse, queryResponse] = await Promise.all([
+        notion.dataSources.retrieve({
+          data_source_id: datasourceId,
+        }),
+        notion.dataSources.query({
+          data_source_id: datasourceId,
+        }),
+      ])
 
       // Support the property types checkbox, date, multi_select, number, rich_text, select, timestamp, status
       const supportedTypes = [
@@ -47,33 +54,40 @@ export async function GET(request: NextRequest) {
         "status",
       ]
 
-      console.log("schemaResponse.properties", schemaResponse.properties)
-
       // Filter schema to only include supported property types
-      const supportedProperties = Object.fromEntries(
-        Object.entries(schemaResponse.properties).filter(([, property]) =>
-          supportedTypes.includes(property.type)
-        )
-      )
+      const filteredSchema: DataSourceObjectResponse = {
+        ...schemaResponse,
+        properties: Object.fromEntries(
+          Object.entries(schemaResponse.properties).filter(([, property]) =>
+            supportedTypes.includes(property.type)
+          )
+        ),
+      } as DataSourceObjectResponse
 
-      // Generate columnDefs from schema
-      const columnDefs = schemaToColumnDefs({
-        properties: supportedProperties,
-      } as DataSourceObjectResponse)
+      // Filter query results to only include pages (exclude data sources)
+      const pageResults = queryResponse.results.filter(
+        (result) => result.object === "page"
+      ) as Array<
+        | import("@notionhq/client/build/src/api-endpoints").PageObjectResponse
+        | import("@notionhq/client/build/src/api-endpoints").PartialPageObjectResponse
+      >
 
-      return NextResponse.json(
-        { properties: supportedProperties, columnDefs },
-        { status: 200 }
-      )
+      // Transform data source response to table format
+      const { columnDefs, data } = datasourceToTable(filteredSchema, {
+        ...queryResponse,
+        results: pageResults,
+      })
+
+      return NextResponse.json({ columnDefs, data }, { status: 200 })
     } catch (error) {
       if (error instanceof Error) {
         return NextResponse.json(
-          { error: `Failed to retrieve schema: ${error.message}` },
+          { error: `Failed to retrieve database: ${error.message}` },
           { status: 400 }
         )
       }
       return NextResponse.json(
-        { error: "Failed to retrieve schema" },
+        { error: "Failed to retrieve database" },
         { status: 400 }
       )
     }

@@ -30,7 +30,7 @@ export function NotionDatasourceForm({
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-hn-orange text-white px-3 py-1 text-sm border-none cursor-pointer hover:opacity-90 whitespace-nowrap"
+          className="bg-hn-orange text-white px-3 py-1 text-sm border-hn-orange cursor-pointer hover:opacity-90 whitespace-nowrap"
         >
           Submit
         </button>
