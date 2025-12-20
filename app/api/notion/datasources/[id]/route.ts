@@ -1,8 +1,7 @@
 import { Client } from "@notionhq/client"
-import type { DataSourceObjectResponse } from "@notionhq/client/build/src/api-endpoints"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
-import { schemaToColumnDefs } from "@/utils/notion-datasource-to-table"
+import { notionPropsToColumnDefs } from "@/utils/notion-data-parser"
 
 export async function GET(request: NextRequest) {
   try {
@@ -35,36 +34,10 @@ export async function GET(request: NextRequest) {
         data_source_id: datasourceId,
       })
 
-      // Support the property types checkbox, date, multi_select, number, rich_text, select, timestamp, status
-      const supportedTypes = [
-        "checkbox",
-        "date",
-        "multi_select",
-        "number",
-        "rich_text",
-        "select",
-        "timestamp",
-        "status",
-      ]
+      // Generate columnDefs from schema - handle all property types
+      const columnDefs = notionPropsToColumnDefs(schemaResponse.properties)
 
-      console.log("schemaResponse.properties", schemaResponse.properties)
-
-      // Filter schema to only include supported property types
-      const supportedProperties = Object.fromEntries(
-        Object.entries(schemaResponse.properties).filter(([, property]) =>
-          supportedTypes.includes(property.type)
-        )
-      )
-
-      // Generate columnDefs from schema
-      const columnDefs = schemaToColumnDefs({
-        properties: supportedProperties,
-      } as DataSourceObjectResponse)
-
-      return NextResponse.json(
-        { properties: supportedProperties, columnDefs },
-        { status: 200 }
-      )
+      return NextResponse.json({ columnDefs }, { status: 200 })
     } catch (error) {
       if (error instanceof Error) {
         return NextResponse.json(

@@ -5,7 +5,7 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
-import { parseDataSourceData } from "@/utils/notion-datasource-to-table"
+import { notionPageResultsToRowData } from "@/utils/notion-data-parser"
 
 type NotionSort =
   | {
@@ -13,7 +13,7 @@ type NotionSort =
       direction: "ascending" | "descending"
     }
   | {
-      timestamp: "created_time" | "last_edited_time"
+      timestamp: "created_time" | "last_edited_time" | "last_visited_time"
       direction: "ascending" | "descending"
     }
 
@@ -97,7 +97,7 @@ export async function GET(request: NextRequest) {
             typeof notion.dataSources.query
           >[0]["filter"],
         }),
-        ...(sorts && { sorts }),
+        // ...(sorts && { sorts }),
       })
 
       // Filter query results to only include pages (exclude data sources)
@@ -106,7 +106,7 @@ export async function GET(request: NextRequest) {
       ) as Array<PageObjectResponse | PartialPageObjectResponse>
 
       // Parse and transform page properties to flat data objects
-      const data = parseDataSourceData(pageResults)
+      const data = notionPageResultsToRowData(pageResults)
 
       return NextResponse.json(
         {

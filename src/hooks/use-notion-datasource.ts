@@ -1,4 +1,4 @@
-import { queryOptions } from "@tanstack/react-query"
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query"
 import type { ColumnDef } from "@tanstack/react-table"
 
 type NotionSort =
@@ -7,7 +7,7 @@ type NotionSort =
       direction: "ascending" | "descending"
     }
   | {
-      timestamp: "created_time" | "last_edited_time"
+      timestamp: "created_time" | "last_edited_time" | "last_visited_time"
       direction: "ascending" | "descending"
     }
 
@@ -29,7 +29,7 @@ export type NotionDatasourceQueryParams = {
   sorts?: NotionSort[]
 }
 
-export function notionDatasourceColumnDefQueryOpts(datasourceId: string) {
+export function notionDatasourceColumnDefOpts(datasourceId: string) {
   return queryOptions({
     queryKey: ["notion-datasource-column-defs", datasourceId],
     queryFn: async () => {
@@ -51,16 +51,16 @@ export function notionDatasourceColumnDefQueryOpts(datasourceId: string) {
   })
 }
 
-export function notionDatasourceDataQueryOpts(
+export function notionDatasourceDataInfiniteOpts(
   datasourceId: string,
-  params?: NotionDatasourceQueryParams
+  params?: Omit<NotionDatasourceQueryParams, "cursor">
 ) {
-  return queryOptions({
+  return infiniteQueryOptions({
     queryKey: ["notion-datasource-data", datasourceId, params],
-    queryFn: async () => {
+    queryFn: async ({ pageParam }: { pageParam: string | null }) => {
       const searchParams = new URLSearchParams()
-      if (params?.cursor) {
-        searchParams.set("cursor", params.cursor)
+      if (pageParam) {
+        searchParams.set("cursor", pageParam)
       }
       if (params?.pageSize) {
         searchParams.set("pageSize", params.pageSize.toString())
@@ -87,6 +87,8 @@ export function notionDatasourceDataQueryOpts(
         has_more: boolean
       }>
     },
+    initialPageParam: null as string | null,
+    getNextPageParam: (lastPage) => lastPage.next_cursor ?? undefined,
     enabled: !!datasourceId,
   })
 }
