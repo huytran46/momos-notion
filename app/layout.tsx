@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Notion database viewer - Desktop only",
-  description: "Notion database viewer - Desktop only",
+  title: "Notion datasource viewer - Desktop only",
+  description: "Notion datasource viewer - Desktop only",
 }
 
 export default function RootLayout({
