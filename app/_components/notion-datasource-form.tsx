@@ -1,6 +1,7 @@
 type NotionDatasourceFormProps = {
   defaultDatasourceId?: string
-  onSubmit: (formData: FormData) => void | Promise<void>
+  // onSubmit: (formData: FormData) => void | Promise<void>
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
 }
 
 export function NotionDatasourceForm({
@@ -8,7 +9,7 @@ export function NotionDatasourceForm({
   onSubmit,
 }: NotionDatasourceFormProps) {
   return (
-    <form action={onSubmit} className="mb-4">
+    <form onSubmit={onSubmit} className="mb-4">
       <div className="flex items-end gap-2 flex-wrap">
         {/* Notion Page ID Field */}
         <div className="flex flex-col gap-0.5 flex-1 min-w-[200px]">
