@@ -1,7 +1,7 @@
 "use client"
 
 import type { ColumnDef } from "@tanstack/react-table"
-import { DataTable } from "@/components/DataTable"
+import { DataTable } from "@/components/data-table"
 
 type MockUser = {
   id: number
