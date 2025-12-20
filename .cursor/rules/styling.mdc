@@ -1,0 +1,124 @@
+---
+alwaysApply: false
+---
+
+# Styling Rules - Hacker News (Y Combinator) Old-School Style
+
+## When to Apply These Rules
+
+**ALWAYS apply these styling rules when:**
+- Creating or modifying CSS/Tailwind styles
+- Designing new UI components (buttons, forms, tables, cards, etc.)
+- Writing inline styles or className attributes
+- Updating global styles in `globals.css` or theme files
+- Implementing layout and spacing
+- Adding colors, typography, or visual effects
+- Building responsive designs
+- Working on any frontend styling-related code
+
+**These rules take precedence over:**
+- Default Tailwind styling conventions
+- Modern UI design trends (gradients, shadows, animations)
+- Any conflicting style guidelines unless explicitly overridden by the user
+
+**Exception:** Only deviate from these rules if the user explicitly requests a different styling approach or specific design that conflicts with these guidelines.
+
+---
+
+## Color Palette
+- **Primary Orange**: `#ff6600` (Hacker News signature orange)
+- **Background**: `#f6f6ef` (light beige/gray background)
+- **Text Primary**: `#000000` (black text)
+- **Text Secondary**: `#828282` (gray for secondary text, metadata)
+- **Link Color**: `#000000` (black links, underline on hover)
+- **Border Color**: `#cccccc` (light gray borders)
+- **Table Header Background**: `#ff6600` (orange header)
+- **Table Row Hover**: `#f0f0f0` (subtle hover effect)
+
+## Typography
+- **Primary Font Stack**: `Verdana, Geneva, sans-serif` (Hacker News classic font)
+- **Font Size Base**: `10pt` or `13px` (small, readable)
+- **Line Height**: `1.4` to `1.6` (comfortable reading)
+- **Font Weight**: `400` (normal) for body, `600` or `700` for headings
+- **No fancy font families** - stick to system fonts
+
+## Layout Principles
+- **Minimal spacing**: Use tight, functional spacing (4px, 8px, 12px increments)
+- **Simple borders**: 1px solid borders, no rounded corners unless necessary
+- **No shadows**: Avoid box-shadows, text-shadows, or drop shadows
+- **No gradients**: Use solid colors only
+- **No animations**: Keep transitions minimal or none
+- **Table-based layouts**: Prefer simple table structures for data (old-school approach)
+- **Centered content**: Main content should be centered with max-width constraints
+
+## Component Styling
+
+### Buttons
+- Simple, flat buttons with solid background
+- Orange buttons: `#ff6600` background, white text
+- Gray buttons: `#cccccc` background, black text
+- No rounded corners (or minimal 2-3px if absolutely necessary)
+- Simple hover: slightly darker shade
+- Padding: `4px 8px` or `6px 12px`
+
+### Links
+- Black text color by default
+- Underline on hover (or always underlined for navigation)
+- No color changes on hover (or subtle darkening)
+- Visited links: same as unvisited (or slightly grayed)
+
+### Forms
+- Simple input fields with 1px solid border
+- Border color: `#cccccc`
+- Focus: simple border color change (to `#ff6600` or darker gray)
+- No fancy focus rings or animations
+- Padding: `4px 6px`
+
+### Tables
+- Simple table structure
+- Header row: orange background (`#ff6600`), white text
+- Alternating row colors: white and `#f6f6ef`
+- Border: 1px solid `#cccccc`
+- Cell padding: `4px 8px`
+
+### Cards/Containers
+- White or `#f6f6ef` background
+- Simple 1px border if needed
+- No rounded corners
+- Minimal padding: `8px 12px`
+
+## Spacing System
+- Use small, consistent increments: `4px`, `8px`, `12px`, `16px`
+- Avoid large spacing (max `24px` for major sections)
+- Tight vertical rhythm
+
+## Visual Effects
+- **NO**: gradients, shadows, blur effects, transforms, animations
+- **YES**: simple color changes, basic borders, minimal hover states
+
+## Responsive Design
+- Keep it simple and functional
+- Stack vertically on mobile
+- Maintain readability at all sizes
+- Don't overcomplicate with fancy breakpoints
+
+## Tailwind CSS Classes to Use
+When using Tailwind, prefer:
+- **Theme colors** (use these instead of arbitrary values):
+  - `bg-hn-orange` for primary orange (`#ff6600`)
+  - `bg-hn-bg` for background (`#f6f6ef`)
+  - `text-hn-text` for primary text (`#000000`)
+  - `text-hn-text-secondary` for secondary text (`#828282`)
+  - `border-hn-border` for borders (`#cccccc`)
+  - `bg-hn-hover` for hover states (`#f0f0f0`)
+- Minimal spacing: `p-1`, `p-2`, `p-3`, `m-1`, `m-2`, `m-3`
+- Simple borders: `border border-hn-border`
+- Font: `font-sans` (ensure Verdana/Geneva in font stack)
+- No: `rounded-lg`, `shadow-*`, `backdrop-*`, `blur-*`, `animate-*`
+
+## General Philosophy
+- **Function over form**: Prioritize readability and usability
+- **Minimalism**: Less is more
+- **Fast loading**: Simple styles = fast rendering
+- **Accessibility**: High contrast, clear typography
+- **Nostalgic simplicity**: Embrace the old-school web aesthetic
