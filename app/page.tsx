@@ -1,113 +1,14 @@
-"use client"
+import { NotionDatasourceViewer } from "./_components/notion-datasource-viewer"
 
-import type { ColumnDef } from "@tanstack/react-table"
-import { DataTable } from "@/components/data-table"
-
-type MockUser = {
-  id: number
-  name: string
-  email: string
-  role: string
-  status: string
+type PageProps = {
+  searchParams: Promise<{ datasourceId?: string; error?: string }>
 }
 
-const mockData: MockUser[] = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "john@example.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    email: "jane@example.com",
-    role: "User",
-    status: "Active",
-  },
-  {
-    id: 3,
-    name: "Bob Johnson",
-    email: "bob@example.com",
-    role: "User",
-    status: "Inactive",
-  },
-  {
-    id: 4,
-    name: "Alice Williams",
-    email: "alice@example.com",
-    role: "Editor",
-    status: "Active",
-  },
-  {
-    id: 5,
-    name: "Charlie Brown",
-    email: "charlie@example.com",
-    role: "User",
-    status: "Active",
-  },
-  {
-    id: 6,
-    name: "Diana Prince",
-    email: "diana@example.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 7,
-    name: "Eve Davis",
-    email: "eve@example.com",
-    role: "User",
-    status: "Inactive",
-  },
-  {
-    id: 8,
-    name: "Frank Miller",
-    email: "frank@example.com",
-    role: "Editor",
-    status: "Active",
-  },
-  {
-    id: 9,
-    name: "Grace Lee",
-    email: "grace@example.com",
-    role: "User",
-    status: "Active",
-  },
-  {
-    id: 10,
-    name: "Henry Wilson",
-    email: "henry@example.com",
-    role: "User",
-    status: "Active",
-  },
-]
+export default async function Home({ searchParams }: PageProps) {
+  const params = await searchParams
 
-const columns: ColumnDef<MockUser>[] = [
-  {
-    accessorKey: "id",
-    header: "ID",
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "role",
-    header: "Role",
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-]
+  const { datasourceId } = params
 
-export default function Home() {
   return (
     <div className="flex flex-col min-h-screen w-full bg-hn-bg font-sans">
       <header className="bg-hn-orange py-1 px-2">
@@ -115,7 +16,7 @@ export default function Home() {
       </header>
       <main className="flex flex-col bg-hn-bg font-sans">
         <div className="w-full max-w-7xl mx-auto p-8">
-          <DataTable columnDefs={columns} data={mockData} />
+          <NotionDatasourceViewer defaultDatasourceId={datasourceId} />
         </div>
       </main>
     </div>
