@@ -109,13 +109,15 @@ const columns: ColumnDef<MockUser>[] = [
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen w-full flex-col bg-hn-bg font-sans">
-      <nav className="bg-hn-orange p-1">
-        <h1 className="text-hn-text">Notion database viewer</h1>
-      </nav>
-      <div className="w-full max-w-7xl mx-auto p-8">
-        <DataTable columnDefs={columns} data={mockData} />
-      </div>
-    </main>
+    <div className="flex flex-col min-h-screen w-full bg-hn-bg font-sans">
+      <header className="bg-hn-orange py-1 px-2">
+        <h1 className="text-hn-text font-medium">Notion database viewer</h1>
+      </header>
+      <main className="flex flex-col bg-hn-bg font-sans">
+        <div className="w-full max-w-7xl mx-auto p-8">
+          <DataTable columnDefs={columns} data={mockData} />
+        </div>
+      </main>
+    </div>
   )
 }
