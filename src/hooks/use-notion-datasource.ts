@@ -1,7 +1,7 @@
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query"
 import type { ColumnDef } from "@tanstack/react-table"
 
-type NotionSort =
+export type NotionSort =
   | {
       property: string
       direction: "ascending" | "descending"

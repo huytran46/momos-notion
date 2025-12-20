@@ -97,7 +97,11 @@ export async function GET(request: NextRequest) {
             typeof notion.dataSources.query
           >[0]["filter"],
         }),
-        // ...(sorts && { sorts }),
+        ...(sorts && {
+          sorts: sorts as Parameters<
+            typeof notion.dataSources.query
+          >[0]["sorts"],
+        }),
       })
 
       // Filter query results to only include pages (exclude data sources)

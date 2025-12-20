@@ -2,13 +2,16 @@
 
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import type { ColumnDef } from "@tanstack/react-table"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { DataTable } from "@/components/data-table"
 import {
+  type NotionSort,
   notionDatasourceColumnDefOpts,
   notionDatasourceDataInfiniteOpts,
 } from "@/hooks/use-notion-datasource"
 import { NotionDatasourceForm } from "./notion-datasource-form"
+
+const EMPTY_COLUMN_DEFS: ColumnDef<Record<string, unknown>>[] = []
 
 export function NotionDatasourceViewer({
   defaultDatasourceId = "",
@@ -24,6 +27,8 @@ export function NotionDatasourceViewer({
     isLoading: isSchemaLoading,
   } = useQuery(notionDatasourceColumnDefOpts(datasourceId))
 
+  const [sorts, setSorts] = useState<NotionSort[]>([])
+
   // Fetch data with infinite pagination
   const {
     data: dataResponse,
@@ -32,17 +37,20 @@ export function NotionDatasourceViewer({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery(notionDatasourceDataInfiniteOpts(datasourceId))
+  } = useInfiniteQuery(
+    notionDatasourceDataInfiniteOpts(datasourceId, {
+      sorts,
+    })
+  )
 
-  // Get columnDefs from schema response
-  const columnDefs: ColumnDef<Record<string, unknown>>[] =
-    schemaData?.columnDefs || []
-
-  // Flatten all pages into a single array
-  const accumulatedData = dataResponse?.pages.flatMap((page) => page.data) ?? []
+  const flatData = useMemo(
+    () => dataResponse?.pages.flatMap((page) => page.data) ?? [],
+    [dataResponse?.pages]
+  )
 
   const error = schemaError || dataError
   const isLoading = isSchemaLoading || (isDataLoading && !dataResponse)
+  const columnDefs = schemaData?.columnDefs ?? EMPTY_COLUMN_DEFS
 
   const handleLoadMore = () => {
     if (hasNextPage) {
@@ -50,9 +58,17 @@ export function NotionDatasourceViewer({
     }
   }
 
-  const handleSubmit = (formData: FormData) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const formData = new FormData(event.target as HTMLFormElement)
     const newId = formData.get("datasourceId") as string
     setDatasourceId(newId)
+    // Reset sorts when datasource changes
+    setSorts([])
+  }
+
+  const handleSortChange = (sorts: NotionSort[]) => {
+    setSorts(sorts)
   }
 
   return (
@@ -72,9 +88,15 @@ export function NotionDatasourceViewer({
         <div className="mb-4 text-hn-text-secondary text-sm">Loading...</div>
       )}
 
-      {!isLoading && columnDefs.length > 0 && accumulatedData.length > 0 && (
+      {!isLoading && columnDefs.length > 0 && flatData.length > 0 && (
         <>
-          <DataTable columnDefs={columnDefs} data={accumulatedData} />
+          <DataTable
+            columnDefs={columnDefs}
+            data={flatData}
+            sorts={sorts}
+            onSortsChange={handleSortChange}
+          />
+
           {/* Load More Button */}
           <div className="mt-4">
             {hasNextPage ? (
@@ -100,7 +122,7 @@ export function NotionDatasourceViewer({
         datasourceId &&
         !error &&
         columnDefs.length > 0 &&
-        accumulatedData.length === 0 && (
+        flatData.length === 0 && (
           <div className="text-hn-text-secondary text-sm">
             No data found in this datasource.
           </div>
