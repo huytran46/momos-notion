@@ -1,45 +1,15 @@
 import {
-  type ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table"
 
-import type { NotionSort } from "@/hooks/use-notion-datasource"
-import { useFeaturedColumnDefs } from "./hooks/use-featured-column-defs"
-import { useSortFeature } from "./hooks/use-sort-feature"
+import type { DataTableProps } from "./data-table.type"
 
-type DataTableProps<TData> = {
-  data: TData[]
-  columnDefs: ColumnDef<TData>[]
-  sorts?: NotionSort[]
-  defaultSorts?: NotionSort[]
-  onSortsChange?: (sorts: NotionSort[]) => void
-}
-
-export function DataTable<TData>({
-  data,
-  columnDefs,
-  // sort feature props
-  sorts: sortsProp,
-  defaultSorts: defaultSortsProp,
-  onSortsChange: onSortsChangeProp,
-}: DataTableProps<TData>) {
-  const { sorts, handleSortToggle } = useSortFeature({
-    sorts: sortsProp,
-    defaultSorts: defaultSortsProp,
-    onSortsChange: onSortsChangeProp,
-  })
-
-  const featuredColumnDefs = useFeaturedColumnDefs({
-    columnDefs,
-    sorts,
-    onToggleSort: handleSortToggle,
-  })
-
+export function DataTable<TData>({ data, columnDefs }: DataTableProps<TData>) {
   const table = useReactTable({
     data,
-    columns: featuredColumnDefs,
+    columns: columnDefs,
     getCoreRowModel: getCoreRowModel(),
   })
 

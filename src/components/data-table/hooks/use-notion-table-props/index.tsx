@@ -1,31 +1,24 @@
 import { type ColumnDef, flexRender } from "@tanstack/react-table"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import type { NotionSort } from "@/hooks/use-notion-datasource"
+import { useSortFeature } from "./use-sort-feature"
 
-type SortFeatureProps =
-  | {
-      sorts: NotionSort[]
-      onToggleSort: (property: string) => void
-    }
-  | {
-      sorts?: never
-      onToggleSort?: never
-    }
-
-type FeaturedColumnDefsProps<T> = {
+type EnhancedColumnDefsProps<T> = {
   columnDefs: ColumnDef<T>[]
+  sorts?: NotionSort[]
+  onToggleSort?: (property: string) => void
 }
 
 // Get columnDefs from schema response and enhance with sortable headers
-export function useFeaturedColumnDefs<T>({
+function useEnhancedColumnDefs<T>({
   columnDefs,
   sorts,
   onToggleSort,
-}: FeaturedColumnDefsProps<T> & SortFeatureProps) {
+}: EnhancedColumnDefsProps<T>) {
   return useMemo<ColumnDef<T>[]>(() => {
     if (!columnDefs.length) return []
 
-    const isEnableSort = onToggleSort != null
+    const isEnableSort = onToggleSort != null || sorts != null
 
     if (!isEnableSort) return columnDefs
 
@@ -37,11 +30,12 @@ export function useFeaturedColumnDefs<T>({
 
       newColumnDef.header = ({ header }) => {
         const columnId = header.id
-        const currentSort = sorts.find(
+        const currentSort = sorts?.find(
           (sort) =>
             ("property" in sort && sort.property === columnId) ||
             ("timestamp" in sort && sort.timestamp === columnId)
         )
+
         return (
           <span className="flex w-full items-center gap-1">
             <span>{flexRender(originalHeader, header.getContext())}</span>
@@ -52,7 +46,7 @@ export function useFeaturedColumnDefs<T>({
                   type="button"
                   className="size-5 cursor-pointer text-xs hover:bg-gray-200"
                   aria-label={`Toggle sort for ${columnId}`}
-                  onClick={() => onToggleSort(columnId)}
+                  onClick={() => onToggleSort?.(columnId)}
                 >
                   {currentSort ? (
                     <span>
@@ -71,4 +65,43 @@ export function useFeaturedColumnDefs<T>({
       return newColumnDef
     })
   }, [columnDefs, sorts, onToggleSort])
+}
+
+export function useNotionTableProps<TData>({
+  originalColumnDefs,
+}: {
+  originalColumnDefs: ColumnDef<TData>[]
+}) {
+  const [_sortsState, _setSortsState] = useState<NotionSort[]>([])
+  const {
+    sorts,
+    handleSortToggle,
+    handleSortReorder,
+    handleSortRemove,
+    handleSortDirectionToggle,
+    handleSortAdd,
+    handleSortReset,
+  } = useSortFeature({
+    sorts: _sortsState,
+    onSortsChange: _setSortsState,
+  })
+
+  const enhancedColumnDefs = useEnhancedColumnDefs({
+    columnDefs: originalColumnDefs,
+    sorts,
+    onToggleSort: handleSortToggle,
+  })
+
+  return {
+    sorts: {
+      state: sorts,
+      handleSortToggle,
+      handleSortReorder,
+      handleSortRemove,
+      handleSortDirectionToggle,
+      handleSortAdd,
+      handleSortReset,
+    },
+    columnDefs: enhancedColumnDefs,
+  }
 }

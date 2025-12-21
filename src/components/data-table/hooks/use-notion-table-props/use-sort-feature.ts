@@ -113,6 +113,11 @@ export function useSortFeature({
     [setSorts]
   )
 
+  // Handle sort reset
+  const handleSortReset = useCallback(() => {
+    setSorts([])
+  }, [setSorts])
+
   return {
     sorts,
     handleSortToggle,
@@ -120,5 +125,6 @@ export function useSortFeature({
     handleSortRemove,
     handleSortDirectionToggle,
     handleSortAdd,
+    handleSortReset,
   }
 }
