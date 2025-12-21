@@ -29,6 +29,7 @@ type SortConfigPanelProps = {
   onRemoveSort: (index: number) => void
   onDirectionToggleSort: (index: number) => void
   onReorderSort: (startIndex: number, endIndex: number) => void
+  onResetSorts: () => void
 }
 
 type SortItemProps = {
@@ -104,6 +105,7 @@ export function NotionSortConfigPopover({
   onRemoveSort,
   onDirectionToggleSort,
   onReorderSort,
+  onResetSorts,
 }: SortConfigPanelProps) {
   const [open, setOpen] = useState(false)
   const [selectedColumn, setSelectedColumn] = useState<string>("")
@@ -201,10 +203,7 @@ export function NotionSortConfigPopover({
   }
 
   const handleReset = () => {
-    // Remove all sorts in reverse order to avoid index shifting issues
-    for (let i = sorts.length - 1; i >= 0; i--) {
-      onRemoveSort(i)
-    }
+    onResetSorts()
   }
 
   return (
