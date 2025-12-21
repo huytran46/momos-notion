@@ -1,4 +1,5 @@
-import { NotionDatasourceViewer } from "./_components/notion-datasource-viewer"
+import { Suspense } from "react"
+import { NotionDatasourceViewer } from "@/features/notion-datasource-viewer"
 
 type PageProps = {
   searchParams: Promise<{ datasourceId?: string; error?: string }>
@@ -16,7 +17,15 @@ export default async function Home({ searchParams }: PageProps) {
       </header>
       <main className="flex flex-col bg-hn-bg font-sans">
         <div className="w-full max-w-7xl mx-auto py-4 px-2">
-          <NotionDatasourceViewer defaultDatasourceId={datasourceId} />
+          <Suspense
+            fallback={
+              <div className="text-hn-text-secondary text-sm">
+                Loading datasource schema...
+              </div>
+            }
+          >
+            <NotionDatasourceViewer defaultDatasourceId={datasourceId} />
+          </Suspense>
         </div>
       </main>
     </div>
