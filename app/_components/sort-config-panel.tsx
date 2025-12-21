@@ -10,7 +10,6 @@ import {
   useSensors,
 } from "@dnd-kit/core"
 import {
-  arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
@@ -24,9 +23,12 @@ import { useMemo, useState } from "react"
 import type { NotionSort } from "@/hooks/use-notion-datasource"
 
 type SortConfigPanelProps = {
-  sorts: NotionSort[]
-  onSortsChange: (sorts: NotionSort[]) => void
   columnDefs: ColumnDef<Record<string, unknown>>[]
+  sorts: NotionSort[]
+  onAddSort: (property: string) => void
+  onRemoveSort: (index: number) => void
+  onDirectionToggleSort: (index: number) => void
+  onReorderSort: (startIndex: number, endIndex: number) => void
 }
 
 type SortItemProps = {
@@ -97,8 +99,11 @@ function SortItem({
 
 export function SortConfigPanel({
   sorts,
-  onSortsChange,
   columnDefs,
+  onAddSort,
+  onRemoveSort,
+  onDirectionToggleSort,
+  onReorderSort,
 }: SortConfigPanelProps) {
   const [open, setOpen] = useState(false)
   const [selectedColumn, setSelectedColumn] = useState<string>("")
@@ -176,47 +181,23 @@ export function SortConfigPanel({
       const newIndex = sorts.findIndex((_, i) => i === Number(over.id))
 
       if (oldIndex !== -1 && newIndex !== -1) {
-        const newSorts = arrayMove(sorts, oldIndex, newIndex)
-        onSortsChange(newSorts)
+        onReorderSort(oldIndex, newIndex)
       }
     }
   }
 
   const handleDirectionToggle = (index: number) => {
-    const newSorts = [...sorts]
-    const sort = newSorts[index]
-    if (sort) {
-      newSorts[index] = {
-        ...sort,
-        direction: sort.direction === "ascending" ? "descending" : "ascending",
-      }
-      onSortsChange(newSorts)
-    }
+    onDirectionToggleSort(index)
   }
 
   const handleRemove = (index: number) => {
-    const newSorts = sorts.filter((_, i) => i !== index)
-    onSortsChange(newSorts)
+    onRemoveSort(index)
   }
 
   const handleAddSort = () => {
     if (!selectedColumn) return
-
-    // Check if already sorted
-    const alreadySorted = sorts.some(
-      (sort) =>
-        ("property" in sort && sort.property === selectedColumn) ||
-        ("timestamp" in sort && sort.timestamp === selectedColumn)
-    )
-
-    if (!alreadySorted) {
-      const newSort: NotionSort = {
-        property: selectedColumn,
-        direction: "ascending",
-      }
-      onSortsChange([...sorts, newSort])
-      setSelectedColumn("")
-    }
+    onAddSort(selectedColumn)
+    setSelectedColumn("")
   }
 
   return (

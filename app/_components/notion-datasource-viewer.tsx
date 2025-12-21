@@ -3,7 +3,7 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import type { ColumnDef } from "@tanstack/react-table"
 import { useMemo, useState } from "react"
-import { DataTable } from "@/components/data-table"
+import { DataTable, useNotionTableProps } from "@/components/data-table"
 import {
   type NotionSort,
   notionDatasourceColumnDefOpts,
@@ -28,7 +28,10 @@ export function NotionDatasourceViewer({
     isLoading: isSchemaLoading,
   } = useQuery(notionDatasourceColumnDefOpts(datasourceId))
 
-  const [sorts, setSorts] = useState<NotionSort[]>([])
+  // Notion table props
+  const { columnDefs: notionTableColumnDefs, sorts } = useNotionTableProps({
+    originalColumnDefs: schemaData?.columnDefs ?? EMPTY_COLUMN_DEFS,
+  })
 
   // Fetch data with infinite pagination
   const {
@@ -40,7 +43,7 @@ export function NotionDatasourceViewer({
     isFetchingNextPage,
   } = useInfiniteQuery(
     notionDatasourceDataInfiniteOpts(datasourceId, {
-      sorts,
+      sorts: sorts.state,
     })
   )
 
@@ -65,11 +68,7 @@ export function NotionDatasourceViewer({
     const newId = formData.get("datasourceId") as string
     setDatasourceId(newId)
     // Reset sorts when datasource changes
-    setSorts([])
-  }
-
-  const handleSortsChange = (sorts: NotionSort[]) => {
-    setSorts(sorts)
+    sorts.handleSortReset()
   }
 
   return (
@@ -83,9 +82,12 @@ export function NotionDatasourceViewer({
       {!isLoading && columnDefs.length > 0 && (
         <div className="mb-4">
           <SortConfigPanel
-            sorts={sorts}
-            onSortsChange={handleSortsChange}
+            sorts={sorts.state}
             columnDefs={columnDefs}
+            onAddSort={sorts.handleSortAdd}
+            onRemoveSort={sorts.handleSortRemove}
+            onDirectionToggleSort={sorts.handleSortDirectionToggle}
+            onReorderSort={sorts.handleSortReorder}
           />
         </div>
       )}
@@ -102,13 +104,7 @@ export function NotionDatasourceViewer({
 
       {!isLoading && columnDefs.length > 0 && flatData.length > 0 && (
         <>
-          <DataTable
-            data={flatData}
-            columnDefs={columnDefs}
-            // Uncontrolled sorts feature
-            defaultSorts={sorts}
-            onSortsChange={handleSortsChange}
-          />
+          <DataTable data={flatData} columnDefs={notionTableColumnDefs} />
 
           {/* Load More Button */}
           <div className="mt-4">
