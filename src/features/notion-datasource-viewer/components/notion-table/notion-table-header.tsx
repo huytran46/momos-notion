@@ -9,6 +9,16 @@ import type { CSSProperties } from "react"
 
 import { useNotionTable } from "./notion-table-context"
 
+// Encode column ID to be safe for CSS variable names
+// CSS custom properties can contain letters, digits, hyphens, and underscores
+// We encode special characters and spaces to ensure valid CSS variable names
+const encodeColumnIdForCSS = (columnId: string): string => {
+  return columnId.replace(/[^a-zA-Z0-9_-]/g, (char) => {
+    // Encode special characters using their char code
+    return `_${char.charCodeAt(0).toString(36)}`
+  })
+}
+
 export function NotionTableHeaderRow<TData>({
   children,
 }: {
@@ -50,11 +60,13 @@ export function NotionTableHeaderCell<TData>({
     transform: CSS.Translate.toString(transform), // translate instead of transform to avoid squishing
     transition: "width transform 0.2s ease-in-out",
     whiteSpace: "nowrap",
-    width: header.column.getSize(),
+    width: `calc(var(--col-${encodeColumnIdForCSS(header.id)}-size) * 1px)`,
     zIndex: isDragging ? 1 : 0,
   }
 
   const columnSortState = sorts.getPropertySortState(columnId)
+  const canResize = header.column.getCanResize()
+  const resizeHandler = canResize ? header.getResizeHandler() : null
 
   return (
     <th
@@ -85,7 +97,7 @@ export function NotionTableHeaderCell<TData>({
 
           {/* Column Order Feature */}
           <button
-            className="size-5 text-xs hover:bg-gray-200 cursor-grab active:cursor-grabbing"
+            className="size-5 text-xs text-gray-400 hover:bg-gray-200 cursor-grab active:cursor-grabbing"
             aria-label={`Drag to reorder column ${columnId}`}
             {...attributes}
             {...listeners}
@@ -94,6 +106,21 @@ export function NotionTableHeaderCell<TData>({
           </button>
         </span>
       </span>
+
+      {/* Column Resize Handle */}
+      {resizeHandler && (
+        <button
+          type="button"
+          onDoubleClick={header.column.resetSize}
+          onMouseDown={resizeHandler}
+          onTouchStart={resizeHandler}
+          className="absolute top-0 right-0 h-full w-1 cursor-col-resize hover:bg-hn-orange bg-transparent touch-none select-none border-0 p-0"
+          style={{
+            userSelect: "none",
+          }}
+          aria-label={`Resize column ${columnId}`}
+        />
+      )}
     </th>
   )
 }
