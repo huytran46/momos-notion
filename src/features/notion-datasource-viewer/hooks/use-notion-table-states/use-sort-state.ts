@@ -1,18 +1,16 @@
 import { useControllableState } from "@radix-ui/react-use-controllable-state"
 import { useCallback } from "react"
-import type { NotionSort } from "@/hooks/use-notion-datasource"
+import type { NotionSort } from "@/features/notion-datasource-viewer/hooks/use-notion-datasource"
 
-type UseSortFeatureProps = {
-  onSortsChange?: (sorts: NotionSort[]) => void
-  sorts?: NotionSort[]
-  defaultSorts?: NotionSort[]
-}
-
-export function useSortFeature({
+export function useSortState({
   sorts: sortsProp,
   defaultSorts = [],
   onSortsChange: onSortsChangeProp,
-}: UseSortFeatureProps) {
+}: {
+  sorts?: NotionSort[]
+  defaultSorts?: NotionSort[]
+  onSortsChange?: (sorts: NotionSort[]) => void
+} = {}) {
   const [sorts, setSorts] = useControllableState<NotionSort[]>({
     prop: sortsProp,
     defaultProp: defaultSorts,
@@ -118,13 +116,25 @@ export function useSortFeature({
     setSorts([])
   }, [setSorts])
 
+  const getPropertySortState = useCallback(
+    (property: string) => {
+      return sorts.find(
+        (sort) =>
+          ("property" in sort && sort.property === property) ||
+          ("timestamp" in sort && sort.timestamp === property)
+      )
+    },
+    [sorts]
+  )
+
   return {
     sorts,
-    handleSortToggle,
-    handleSortReorder,
-    handleSortRemove,
-    handleSortDirectionToggle,
+    getPropertySortState,
     handleSortAdd,
     handleSortReset,
+    handleSortRemove,
+    handleSortToggle,
+    handleSortReorder,
+    handleSortDirectionToggle,
   }
 }

@@ -539,6 +539,7 @@ export function notionPropsToColumnDefs(
   properties: DataSourceObjectResponse["properties"]
 ): ColumnDef<Record<string, unknown>>[] {
   return Object.entries(properties).map(([key, property]) => ({
+    id: key, // unique id for the column
     accessorKey: key,
     header: property.name,
   }))

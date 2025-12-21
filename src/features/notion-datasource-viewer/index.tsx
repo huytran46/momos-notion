@@ -1,18 +1,17 @@
 "use client"
 
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query"
 import type { ColumnDef } from "@tanstack/react-table"
 import { useMemo, useState } from "react"
-import { DataTable, useNotionTableProps } from "@/components/data-table"
+
+import { NotionDatasourceForm } from "./components/notion-datasource-form"
+import { NotionSortConfigPopover } from "./components/notion-sort-config-popover"
+import { NotionTable } from "./components/notion-table"
 import {
-  type NotionSort,
   notionDatasourceColumnDefOpts,
   notionDatasourceDataInfiniteOpts,
-} from "@/hooks/use-notion-datasource"
-import { NotionDatasourceForm } from "./notion-datasource-form"
-import { SortConfigPanel } from "./sort-config-panel"
-
-const EMPTY_COLUMN_DEFS: ColumnDef<Record<string, unknown>>[] = []
+} from "./hooks/use-notion-datasource"
+import { useNotionTableStates } from "./hooks/use-notion-table-states"
 
 export function NotionDatasourceViewer({
   defaultDatasourceId = "",
@@ -26,11 +25,19 @@ export function NotionDatasourceViewer({
     data: schemaData,
     error: schemaError,
     isLoading: isSchemaLoading,
-  } = useQuery(notionDatasourceColumnDefOpts(datasourceId))
+  } = useSuspenseQuery(notionDatasourceColumnDefOpts(datasourceId))
 
-  // Notion table props
-  const { columnDefs: notionTableColumnDefs, sorts } = useNotionTableProps({
-    originalColumnDefs: schemaData?.columnDefs ?? EMPTY_COLUMN_DEFS,
+  const columnIds = useMemo(() => {
+    return schemaData.columnDefs.map((colDef) => {
+      if (!colDef.id)
+        throw new Error(`Column ID is required for column definition.`)
+      return colDef.id
+    })
+  }, [schemaData.columnDefs])
+
+  // Notion table states
+  const { sorts, columnOrder } = useNotionTableStates({
+    columnIds,
   })
 
   // Fetch data with infinite pagination
@@ -47,6 +54,8 @@ export function NotionDatasourceViewer({
     })
   )
 
+  const columnDefs = schemaData.columnDefs
+
   const flatData = useMemo(
     () => dataResponse?.pages.flatMap((page) => page.data) ?? [],
     [dataResponse?.pages]
@@ -54,7 +63,6 @@ export function NotionDatasourceViewer({
 
   const error = schemaError || dataError
   const isLoading = isSchemaLoading || (isDataLoading && !dataResponse)
-  const columnDefs = schemaData?.columnDefs ?? EMPTY_COLUMN_DEFS
 
   const handleLoadMore = () => {
     if (hasNextPage) {
@@ -73,17 +81,18 @@ export function NotionDatasourceViewer({
 
   return (
     <>
+      {/* Form to select datasource */}
       <NotionDatasourceForm
         defaultDatasourceId={datasourceId}
         onSubmit={handleSubmit}
       />
 
-      {/* View config panel */}
-      {!isLoading && columnDefs.length > 0 && (
+      {/* Sort */}
+      {!isSchemaLoading && columnDefs.length > 0 && (
         <div className="mb-4">
-          <SortConfigPanel
-            sorts={sorts.state}
+          <NotionSortConfigPopover
             columnDefs={columnDefs}
+            sorts={sorts.state}
             onAddSort={sorts.handleSortAdd}
             onRemoveSort={sorts.handleSortRemove}
             onDirectionToggleSort={sorts.handleSortDirectionToggle}
@@ -104,7 +113,14 @@ export function NotionDatasourceViewer({
 
       {!isLoading && columnDefs.length > 0 && flatData.length > 0 && (
         <>
-          <DataTable data={flatData} columnDefs={notionTableColumnDefs} />
+          <NotionTable
+            data={flatData}
+            columnDefs={columnDefs}
+            columnOrder={columnOrder.state}
+            onColumnDragEnd={columnOrder.handleColumnDragEnd}
+            getPropertySortState={sorts.getPropertySortState}
+            handleSortToggle={sorts.handleSortToggle}
+          />
 
           {/* Load More Button */}
           <div className="mt-4">

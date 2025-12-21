@@ -20,7 +20,7 @@ import * as Popover from "@radix-ui/react-popover"
 import * as Select from "@radix-ui/react-select"
 import type { ColumnDef } from "@tanstack/react-table"
 import { useMemo, useState } from "react"
-import type { NotionSort } from "@/hooks/use-notion-datasource"
+import type { NotionSort } from "@/features/notion-datasource-viewer/hooks/use-notion-datasource"
 
 type SortConfigPanelProps = {
   columnDefs: ColumnDef<Record<string, unknown>>[]
@@ -97,7 +97,7 @@ function SortItem({
   )
 }
 
-export function SortConfigPanel({
+export function NotionSortConfigPopover({
   sorts,
   columnDefs,
   onAddSort,
@@ -194,10 +194,17 @@ export function SortConfigPanel({
     onRemoveSort(index)
   }
 
-  const handleAddSort = () => {
-    if (!selectedColumn) return
-    onAddSort(selectedColumn)
+  const handleColumnSelect = (value: string) => {
+    if (!value) return
+    onAddSort(value)
     setSelectedColumn("")
+  }
+
+  const handleReset = () => {
+    // Remove all sorts in reverse order to avoid index shifting issues
+    for (let i = sorts.length - 1; i >= 0; i--) {
+      onRemoveSort(i)
+    }
   }
 
   return (
@@ -256,7 +263,7 @@ export function SortConfigPanel({
                 <div className="flex gap-2">
                   <Select.Root
                     value={selectedColumn}
-                    onValueChange={setSelectedColumn}
+                    onValueChange={handleColumnSelect}
                   >
                     <Select.Trigger className="flex-1 px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0">
                       <Select.Value placeholder="Select column" />
@@ -284,11 +291,11 @@ export function SortConfigPanel({
                   </Select.Root>
                   <button
                     type="button"
-                    onClick={handleAddSort}
-                    disabled={!selectedColumn}
+                    onClick={handleReset}
+                    disabled={sorts.length === 0}
                     className="px-3 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Add
+                    Reset
                   </button>
                 </div>
               </div>

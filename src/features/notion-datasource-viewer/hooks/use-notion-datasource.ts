@@ -29,11 +29,22 @@ export type NotionDatasourceQueryParams = {
   sorts?: NotionSort[]
 }
 
+function getApiUrl(path: string): string {
+  // During SSR, we need an absolute URL
+  if (typeof window === "undefined") {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+    return `${baseUrl}${path}`
+  }
+  // On the client, relative URLs work fine
+  return path
+}
+
 export function notionDatasourceColumnDefOpts(datasourceId: string) {
   return queryOptions({
     queryKey: ["notion-datasource-column-defs", datasourceId],
     queryFn: async () => {
-      const response = await fetch(`/api/notion/datasources/${datasourceId}`)
+      const url = getApiUrl(`/api/notion/datasources/${datasourceId}`)
+      const response = await fetch(url)
 
       if (!response.ok) {
         const error = await response.json()
@@ -73,7 +84,8 @@ export function notionDatasourceDataInfiniteOpts(
       }
 
       const queryString = searchParams.toString()
-      const url = `/api/notion/datasources/${datasourceId}/data${queryString ? `?${queryString}` : ""}`
+      const path = `/api/notion/datasources/${datasourceId}/data${queryString ? `?${queryString}` : ""}`
+      const url = getApiUrl(path)
       const response = await fetch(url)
 
       if (!response.ok) {
