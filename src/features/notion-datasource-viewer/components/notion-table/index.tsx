@@ -11,7 +11,12 @@ import {
   useSensors,
 } from "@dnd-kit/core"
 import { restrictToHorizontalAxis } from "@dnd-kit/modifiers"
-import type { ColumnDef, ColumnOrderState } from "@tanstack/react-table"
+import type {
+  ColumnDef,
+  ColumnOrderState,
+  ColumnSizingState,
+  OnChangeFn,
+} from "@tanstack/react-table"
 import { DataTable } from "@/components/data-table"
 import type { NotionSort } from "@/features/notion-datasource-viewer/hooks/use-notion-datasource"
 
@@ -50,6 +55,8 @@ export function NotionTable<TData>({
   columnDefs,
   columnOrder,
   onColumnDragEnd,
+  columnSizing,
+  onColumnSizingChange,
   getPropertySortState,
   handleSortToggle,
 }: {
@@ -57,6 +64,8 @@ export function NotionTable<TData>({
   columnDefs: ColumnDef<TData>[]
   columnOrder: ColumnOrderState
   onColumnDragEnd: (event: DragEndEvent) => void
+  columnSizing: ColumnSizingState
+  onColumnSizingChange: OnChangeFn<ColumnSizingState>
   getPropertySortState: (property: string) => NotionSort | undefined
   handleSortToggle: (property: string) => void
 }) {
@@ -70,6 +79,10 @@ export function NotionTable<TData>({
         columnOrder: {
           state: columnOrder,
         },
+        columnSizing: {
+          state: columnSizing,
+          setState: onColumnSizingChange,
+        },
       }}
     >
       <ColumnOrderDndContext onColumnDragEnd={onColumnDragEnd}>
@@ -77,6 +90,8 @@ export function NotionTable<TData>({
           data={data}
           columnDefs={columnDefs}
           columnOrder={columnOrder}
+          columnSizing={columnSizing}
+          onColumnSizingChange={onColumnSizingChange}
           components={{
             headerRow: NotionTableHeaderRow,
             headerCell: NotionTableHeaderCell,

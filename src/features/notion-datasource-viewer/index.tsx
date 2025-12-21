@@ -1,7 +1,6 @@
 "use client"
 
 import { useInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query"
-import type { ColumnDef } from "@tanstack/react-table"
 import { useMemo, useState } from "react"
 
 import { NotionDatasourceForm } from "./components/notion-datasource-form"
@@ -27,16 +26,18 @@ export function NotionDatasourceViewer({
     isLoading: isSchemaLoading,
   } = useSuspenseQuery(notionDatasourceColumnDefOpts(datasourceId))
 
-  const columnIds = useMemo(() => {
-    return schemaData.columnDefs.map((colDef) => {
-      if (!colDef.id)
-        throw new Error(`Column ID is required for column definition.`)
-      return colDef.id
-    })
-  }, [schemaData.columnDefs])
+  const columnIds = useMemo(
+    () =>
+      schemaData.columnDefs.map((colDef) => {
+        if (!colDef.id)
+          throw new Error(`Column ID is required for column definition.`)
+        return colDef.id
+      }),
+    [schemaData.columnDefs]
+  )
 
   // Notion table states
-  const { sorts, columnOrder } = useNotionTableStates({
+  const { sorts, columnOrder, columnSizing } = useNotionTableStates({
     columnIds,
   })
 
@@ -97,6 +98,7 @@ export function NotionDatasourceViewer({
             onRemoveSort={sorts.handleSortRemove}
             onDirectionToggleSort={sorts.handleSortDirectionToggle}
             onReorderSort={sorts.handleSortReorder}
+            onResetSorts={sorts.handleSortReset}
           />
         </div>
       )}
@@ -118,6 +120,8 @@ export function NotionDatasourceViewer({
             columnDefs={columnDefs}
             columnOrder={columnOrder.state}
             onColumnDragEnd={columnOrder.handleColumnDragEnd}
+            columnSizing={columnSizing.state}
+            onColumnSizingChange={columnSizing.setState}
             getPropertySortState={sorts.getPropertySortState}
             handleSortToggle={sorts.handleSortToggle}
           />

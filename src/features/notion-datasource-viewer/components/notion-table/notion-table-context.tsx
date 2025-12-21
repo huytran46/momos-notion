@@ -1,6 +1,10 @@
 "use client"
 
-import type { ColumnOrderState } from "@tanstack/react-table"
+import type {
+  ColumnOrderState,
+  ColumnSizingState,
+  OnChangeFn,
+} from "@tanstack/react-table"
 import { createContext, useContext } from "react"
 import type { NotionSort } from "@/features/notion-datasource-viewer/hooks/use-notion-datasource"
 
@@ -11,6 +15,10 @@ type NotionTableContextValue = {
   }
   columnOrder: {
     state: ColumnOrderState
+  }
+  columnSizing: {
+    state: ColumnSizingState
+    setState: OnChangeFn<ColumnSizingState>
   }
 }
 
