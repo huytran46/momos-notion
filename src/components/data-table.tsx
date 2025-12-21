@@ -1,6 +1,7 @@
 import type {
   ColumnDef,
   ColumnOrderState,
+  ColumnSizingState,
   Header,
   HeaderGroup,
   OnChangeFn,
@@ -11,12 +12,15 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import { useMemo } from "react"
 
 export type DataTableProps<TData> = {
   data: TData[]
   columnDefs: ColumnDef<TData>[]
   columnOrder?: ColumnOrderState
   onColumnOrderChange?: OnChangeFn<ColumnOrderState>
+  columnSizing?: ColumnSizingState
+  onColumnSizingChange?: OnChangeFn<ColumnSizingState>
   components?: {
     headerRow?: React.ComponentType<{
       headerGroup: HeaderGroup<TData>
@@ -55,11 +59,23 @@ function DefaultHeaderCell<TData>({
   )
 }
 
+// Encode column ID to be safe for CSS variable names
+// CSS custom properties can contain letters, digits, hyphens, and underscores
+// We encode special characters and spaces to ensure valid CSS variable names
+function encodeColumnIdForCSS(columnId: string): string {
+  return columnId.replace(/[^a-zA-Z0-9_-]/g, (char) => {
+    // Encode special characters using their char code
+    return `_${char.charCodeAt(0).toString(36)}`
+  })
+}
+
 export function DataTable<TData>({
   data,
   columnDefs,
   columnOrder,
   onColumnOrderChange,
+  columnSizing,
+  onColumnSizingChange,
   components,
 }: DataTableProps<TData>) {
   const table = useReactTable({
@@ -68,19 +84,46 @@ export function DataTable<TData>({
     columns: columnDefs,
     state: {
       columnOrder,
+      columnSizing,
     },
     onColumnOrderChange,
+    onColumnSizingChange,
+    columnResizeMode: "onChange",
   })
+
+  const HeaderRowComponent = components?.headerRow || DefaultHeaderRow
+  const HeaderCellComponent = components?.headerCell || DefaultHeaderCell
+
+  const columnSizingInfo = table.getState().columnSizingInfo
+  const columnSizingState = table.getState().columnSizing
+
+  /**
+   * Instead of calling `column.getSize()` on every render for every header
+   * and especially every data cell (very expensive),
+   * we will calculate all column sizes at once at the root table level in a useMemo
+   * and pass the column sizes down as CSS variables to the <table> element.
+   */
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Following TanStack Table documentation pattern
+  const columnSizeVars = useMemo(() => {
+    const headers = table.getFlatHeaders()
+    const colSizes: { [key: string]: number } = {}
+    for (let i = 0; i < headers.length; i++) {
+      const header = headers[i]
+      if (!header) continue
+      const encodedColumnId = encodeColumnIdForCSS(header.column.id)
+      colSizes[`--col-${encodedColumnId}-size`] = header.column.getSize()
+    }
+    return colSizes
+  }, [columnSizingInfo, columnSizingState])
 
   return (
     <div className="w-full overflow-auto">
-      <table className="w-full border-collapse text-sm">
+      <table
+        className="w-full border-collapse text-sm table-fixed"
+        style={columnSizeVars}
+      >
         <thead>
           {table.getHeaderGroups().map((headerGroup) => {
-            const HeaderRowComponent = components?.headerRow || DefaultHeaderRow
-            const HeaderCellComponent =
-              components?.headerCell || DefaultHeaderCell
-
             return (
               <HeaderRowComponent
                 key={headerGroup.id}
