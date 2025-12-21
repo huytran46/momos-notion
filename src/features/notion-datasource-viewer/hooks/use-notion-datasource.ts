@@ -1,5 +1,6 @@
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query"
 import type { ColumnDef } from "@tanstack/react-table"
+import type { AppFilter } from "@/features/notion-datasource-viewer/types/notion-filters"
 
 export type NotionSort =
   | {
@@ -11,21 +12,10 @@ export type NotionSort =
       direction: "ascending" | "descending"
     }
 
-// Filter type matches Notion's QueryDataSourceBodyParameters.filter
-// This is a union of PropertyFilter, TimestampFilter, or group filters (or/and)
-type NotionFilter =
-  | {
-      or: unknown[]
-    }
-  | {
-      and: unknown[]
-    }
-  | Record<string, unknown>
-
 export type NotionDatasourceQueryParams = {
   cursor?: string | null
   pageSize?: number
-  filter?: NotionFilter
+  filter?: AppFilter
   sorts?: NotionSort[]
 }
 

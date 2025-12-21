@@ -1,0 +1,20 @@
+---
+alwaysApply: true
+---
+
+# Separation of Concerns
+
+## UI Components (Presentation Layer):
+
+Display data received via props.
+Handle user interactions (events).
+Call handler functions from hooks.
+No business logic, calculations, or validations.
+Pure presentation components.
+
+## Business Logic Layer:
+
+Hooks: State management and operations.
+Utilities: Pure functions for validation, calculations, conversions, .etc.
+All business rules, validations, and calculations live here.
+Components delegate all logic to this layer.

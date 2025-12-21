@@ -4,6 +4,7 @@ import { useInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query"
 import { useMemo, useState } from "react"
 
 import { NotionDatasourceForm } from "./components/notion-datasource-form"
+import { NotionFilterConfigPopover } from "./components/notion-filter-config-popover"
 import { NotionSortConfigPopover } from "./components/notion-sort-config-popover"
 import { NotionTable } from "./components/notion-table"
 import {
@@ -37,7 +38,7 @@ export function NotionDatasourceViewer({
   )
 
   // Notion table states
-  const { sorts, columnOrder, columnSizing } = useNotionTableStates({
+  const { sorts, filters, columnOrder, columnSizing } = useNotionTableStates({
     columnIds,
   })
 
@@ -52,6 +53,7 @@ export function NotionDatasourceViewer({
   } = useInfiniteQuery(
     notionDatasourceDataInfiniteOpts(datasourceId, {
       sorts: sorts.state,
+      filter: filters.appliedState,
     })
   )
 
@@ -76,8 +78,9 @@ export function NotionDatasourceViewer({
     const formData = new FormData(event.target as HTMLFormElement)
     const newId = formData.get("datasourceId") as string
     setDatasourceId(newId)
-    // Reset sorts when datasource changes
+    // Reset sorts and filters when datasource changes
     sorts.handleSortReset()
+    filters.handleResetFilters()
   }
 
   return (
@@ -88,9 +91,9 @@ export function NotionDatasourceViewer({
         onSubmit={handleSubmit}
       />
 
-      {/* Sort */}
+      {/* Sort and Filter */}
       {!isSchemaLoading && columnDefs.length > 0 && (
-        <div className="mb-4">
+        <div className="mb-4 flex gap-2">
           <NotionSortConfigPopover
             columnDefs={columnDefs}
             sorts={sorts.state}
@@ -99,6 +102,24 @@ export function NotionDatasourceViewer({
             onDirectionToggleSort={sorts.handleSortDirectionToggle}
             onReorderSort={sorts.handleSortReorder}
             onResetSorts={sorts.handleSortReset}
+          />
+          <NotionFilterConfigPopover
+            filters={filters.draftState}
+            columnDefs={columnDefs}
+            maxNestingDepth={filters.maxNestingDepth}
+            hasUnsavedChanges={filters.hasUnsavedChanges}
+            onMaxNestingDepthChange={filters.handleMaxNestingDepthChange}
+            onAddFilter={filters.handleAddFilter}
+            onRemoveFilter={filters.handleRemoveFilter}
+            onToggleGroupOperator={filters.handleToggleGroupOperator}
+            onAddGroup={filters.handleAddGroup}
+            onAddFilterToGroup={filters.handleAddFilterToGroup}
+            onAddGroupToPath={filters.handleAddGroupToPath}
+            onConvertToGroup={filters.handleConvertToGroup}
+            onUpdateFilter={filters.handleUpdateFilter}
+            onDuplicateFilter={filters.handleDuplicateFilter}
+            onApplyFilters={filters.handleApplyFilters}
+            onResetFilters={filters.handleResetFilters}
           />
         </div>
       )}

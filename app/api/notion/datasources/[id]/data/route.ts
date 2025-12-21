@@ -5,7 +5,12 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
+import type { AppFilter } from "@/features/notion-datasource-viewer/types/notion-filters"
 import { notionPageResultsToRowData } from "@/utils/notion-data-parser"
+import {
+  convertToNotionApiFormat,
+  validateNotionFilter,
+} from "@/utils/notion-filter-utils"
 
 type NotionSort =
   | {
@@ -16,17 +21,6 @@ type NotionSort =
       timestamp: "created_time" | "last_edited_time" | "last_visited_time"
       direction: "ascending" | "descending"
     }
-
-// Filter type matches Notion's QueryDataSourceBodyParameters.filter
-// This is a union of PropertyFilter, TimestampFilter, or group filters (or/and)
-type NotionFilter =
-  | {
-      or: unknown[]
-    }
-  | {
-      and: unknown[]
-    }
-  | Record<string, unknown>
 
 export async function GET(request: NextRequest) {
   try {
@@ -59,15 +53,45 @@ export async function GET(request: NextRequest) {
     const pageSizeParam = searchParams.get("pageSize")
     const pageSize = pageSizeParam ? Number.parseInt(pageSizeParam, 10) : 50
 
-    let filter: NotionFilter | undefined
+    let clientFilter: AppFilter | undefined
 
     const filterParam = searchParams.get("filter")
     if (filterParam) {
       try {
-        filter = JSON.parse(filterParam) as NotionFilter
+        clientFilter = JSON.parse(filterParam) as AppFilter
       } catch {
         return NextResponse.json(
           { error: "Invalid filter parameter" },
+          { status: 400 }
+        )
+      }
+    }
+
+    // Convert client filter to Notion API format
+    let notionFilter: Record<string, unknown> | undefined
+    if (clientFilter) {
+      try {
+        notionFilter = convertToNotionApiFormat(clientFilter)
+
+        // Validate the converted filter
+        if (notionFilter) {
+          const validation = validateNotionFilter(notionFilter)
+          if (!validation.valid) {
+            return NextResponse.json(
+              { error: `Invalid filter: ${validation.error}` },
+              { status: 400 }
+            )
+          }
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          return NextResponse.json(
+            { error: `Filter conversion failed: ${error.message}` },
+            { status: 400 }
+          )
+        }
+        return NextResponse.json(
+          { error: "Filter conversion failed" },
           { status: 400 }
         )
       }
@@ -92,8 +116,8 @@ export async function GET(request: NextRequest) {
         data_source_id: datasourceId,
         page_size: pageSize,
         ...(cursor && { start_cursor: cursor }),
-        ...(filter && {
-          filter: filter as Parameters<
+        ...(notionFilter && {
+          filter: notionFilter as Parameters<
             typeof notion.dataSources.query
           >[0]["filter"],
         }),

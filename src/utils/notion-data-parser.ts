@@ -542,6 +542,21 @@ export function notionPropsToColumnDefs(
     id: key, // unique id for the column
     accessorKey: key,
     header: property.name,
+    meta: {
+      propertyType: property.type,
+      ...(property.type === "select" &&
+        "select" in property && {
+          selectOptions: property.select.options,
+        }),
+      ...(property.type === "multi_select" &&
+        "multi_select" in property && {
+          multiSelectOptions: property.multi_select.options,
+        }),
+      ...(property.type === "status" &&
+        "status" in property && {
+          statusOptions: property.status.options,
+        }),
+    },
   }))
 }
 
