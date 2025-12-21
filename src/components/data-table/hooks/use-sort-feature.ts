@@ -1,5 +1,3 @@
-"use client"
-
 import { useControllableState } from "@radix-ui/react-use-controllable-state"
 import { useCallback } from "react"
 import type { NotionSort } from "@/hooks/use-notion-datasource"
@@ -56,5 +54,71 @@ export function useSortFeature({
     [setSorts]
   )
 
-  return { sorts, handleSortToggle }
+  // Handle sort reordering (drag and drop)
+  const handleSortReorder = useCallback(
+    (startIndex: number, endIndex: number) => {
+      setSorts((prev) => {
+        const newSorts = [...prev]
+        const [removed] = newSorts.splice(startIndex, 1)
+        newSorts.splice(endIndex, 0, removed)
+        return newSorts
+      })
+    },
+    [setSorts]
+  )
+
+  // Handle sort removal by index
+  const handleSortRemove = useCallback(
+    (index: number) => {
+      setSorts((prev) => prev.filter((_, i) => i !== index))
+    },
+    [setSorts]
+  )
+
+  // Handle sort direction toggle by index
+  const handleSortDirectionToggle = useCallback(
+    (index: number) => {
+      setSorts((prev) => {
+        const newSorts = [...prev]
+        const sort = newSorts[index]
+        if (sort) {
+          newSorts[index] = {
+            ...sort,
+            direction:
+              sort.direction === "ascending" ? "descending" : "ascending",
+          }
+        }
+        return newSorts
+      })
+    },
+    [setSorts]
+  )
+
+  // Handle adding a new sort
+  const handleSortAdd = useCallback(
+    (property: string) => {
+      setSorts((prev) => {
+        // Check if sort already exists
+        const exists = prev.some(
+          (sort) =>
+            ("property" in sort && sort.property === property) ||
+            ("timestamp" in sort && sort.timestamp === property)
+        )
+        if (exists) {
+          return prev
+        }
+        return [...prev, { property, direction: "ascending" }]
+      })
+    },
+    [setSorts]
+  )
+
+  return {
+    sorts,
+    handleSortToggle,
+    handleSortReorder,
+    handleSortRemove,
+    handleSortDirectionToggle,
+    handleSortAdd,
+  }
 }

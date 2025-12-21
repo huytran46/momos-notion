@@ -1,5 +1,3 @@
-"use client"
-
 import { type ColumnDef, flexRender } from "@tanstack/react-table"
 import { useMemo } from "react"
 import type { NotionSort } from "@/hooks/use-notion-datasource"
@@ -45,16 +43,16 @@ export function useFeaturedColumnDefs<T>({
             ("timestamp" in sort && sort.timestamp === columnId)
         )
         return (
-          <div className="flex w-full items-center gap-1">
+          <span className="flex w-full items-center gap-1">
             <span>{flexRender(originalHeader, header.getContext())}</span>
             <span className="ml-auto">
               {/* Sort Feature */}
               {isEnableSort && (
                 <button
                   type="button"
-                  onClick={() => onToggleSort(columnId)}
                   className="size-5 cursor-pointer text-xs hover:bg-gray-200"
-                  aria-label={`Sort by ${columnId}`}
+                  aria-label={`Toggle sort for ${columnId}`}
+                  onClick={() => onToggleSort(columnId)}
                 >
                   {currentSort ? (
                     <span>
@@ -66,7 +64,7 @@ export function useFeaturedColumnDefs<T>({
                 </button>
               )}
             </span>
-          </div>
+          </span>
         )
       }
 

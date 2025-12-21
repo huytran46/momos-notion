@@ -1,5 +1,3 @@
-"use client"
-
 import {
   type ColumnDef,
   flexRender,
@@ -54,6 +52,7 @@ export function DataTable<TData>({
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
+                  colSpan={header.colSpan}
                   className="p-1 border border-gray-300 bg-gray-100 text-left font-semibold"
                 >
                   {header.isPlaceholder
