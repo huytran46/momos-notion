@@ -10,6 +10,7 @@ import {
   notionDatasourceDataInfiniteOpts,
 } from "@/hooks/use-notion-datasource"
 import { NotionDatasourceForm } from "./notion-datasource-form"
+import { SortConfigPanel } from "./sort-config-panel"
 
 const EMPTY_COLUMN_DEFS: ColumnDef<Record<string, unknown>>[] = []
 
@@ -67,7 +68,7 @@ export function NotionDatasourceViewer({
     setSorts([])
   }
 
-  const handleSortChange = (sorts: NotionSort[]) => {
+  const handleSortsChange = (sorts: NotionSort[]) => {
     setSorts(sorts)
   }
 
@@ -77,6 +78,17 @@ export function NotionDatasourceViewer({
         defaultDatasourceId={datasourceId}
         onSubmit={handleSubmit}
       />
+
+      {/* View config panel */}
+      {!isLoading && columnDefs.length > 0 && (
+        <div className="mb-4">
+          <SortConfigPanel
+            sorts={sorts}
+            onSortsChange={handleSortsChange}
+            columnDefs={columnDefs}
+          />
+        </div>
+      )}
 
       {/* Error Messages */}
       {error && (
@@ -91,10 +103,11 @@ export function NotionDatasourceViewer({
       {!isLoading && columnDefs.length > 0 && flatData.length > 0 && (
         <>
           <DataTable
-            columnDefs={columnDefs}
             data={flatData}
-            sorts={sorts}
-            onSortsChange={handleSortChange}
+            columnDefs={columnDefs}
+            // Uncontrolled sorts feature
+            defaultSorts={sorts}
+            onSortsChange={handleSortsChange}
           />
 
           {/* Load More Button */}
