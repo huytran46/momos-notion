@@ -265,7 +265,10 @@ export function NotionSortConfigPopover({
                     onValueChange={handleColumnSelect}
                   >
                     <Select.Trigger className="flex-1 px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0">
-                      <Select.Value placeholder="Select column" />
+                      <Select.Value
+                        placeholder="Select column"
+                        className="data-placeholder:text-hn-text-secondary"
+                      />
                       <Select.Icon className="text-hn-text-secondary">
                         ▼
                       </Select.Icon>

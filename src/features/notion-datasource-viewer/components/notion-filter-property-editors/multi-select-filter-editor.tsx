@@ -26,7 +26,10 @@ export function MultiSelectFilterEditor({
       disabled={disabled}
     >
       <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0 disabled:opacity-50 disabled:cursor-not-allowed">
-        <Select.Value placeholder="Select option" />
+        <Select.Value
+          placeholder="Select option"
+          className="data-placeholder:text-hn-text-secondary"
+        />
         <Select.Icon className="text-hn-text-secondary">▼</Select.Icon>
       </Select.Trigger>
       <Select.Portal>
