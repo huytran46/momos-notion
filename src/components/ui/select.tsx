@@ -55,25 +55,37 @@ SelectScrollDownButton.displayName =
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = "popper", ...props }, ref) => (
-  <SelectPrimitive.Content
-    ref={ref}
-    className={cn("bg-white border border-hn-border shadow-none", className)}
-    position={position}
-    {...props}
-  >
-    <SelectScrollUpButton />
-    <SelectPrimitive.Viewport
-      className={cn(
-        "p-1",
-        position === "popper" && "w-[var(--radix-select-trigger-width)]"
-      )}
+>(
+  (
+    {
+      className,
+      children,
+      position = "popper",
+      collisionPadding = 8,
+      ...props
+    },
+    ref
+  ) => (
+    <SelectPrimitive.Content
+      ref={ref}
+      className={cn("bg-white border border-hn-border shadow-none", className)}
+      position={position}
+      collisionPadding={collisionPadding}
+      {...props}
     >
-      {children}
-    </SelectPrimitive.Viewport>
-    <SelectScrollDownButton />
-  </SelectPrimitive.Content>
-))
+      <SelectScrollUpButton />
+      <SelectPrimitive.Viewport
+        className={cn(
+          "p-1",
+          position === "popper" && "min-w-[var(--radix-select-trigger-width)]"
+        )}
+      >
+        {children}
+      </SelectPrimitive.Viewport>
+      <SelectScrollDownButton />
+    </SelectPrimitive.Content>
+  )
+)
 SelectContent.displayName = SelectPrimitive.Content.displayName
 
 const SelectLabel = SelectPrimitive.Label
