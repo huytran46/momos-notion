@@ -21,7 +21,7 @@ import { SelectFilterEditor } from "./notion-filter-property-editors/select-filt
 import { StatusFilterEditor } from "./notion-filter-property-editors/status-filter-editor"
 import { TimestampFilterEditor } from "./notion-filter-property-editors/timestamp-filter-editor"
 
-type NotionFilterConditionProps = {
+type NotionFilterItemProps = {
   condition: FilterCondition
   columnDefs: ColumnDef<Record<string, unknown>>[]
   onUpdate: (updates: Partial<FilterCondition>) => void
@@ -34,7 +34,7 @@ type NotionFilterConditionProps = {
   onOperatorChange?: (operator: "and" | "or") => void
 }
 
-export function NotionFilterCondition({
+export function NotionFilterItem({
   condition,
   columnDefs,
   onUpdate,
@@ -45,7 +45,7 @@ export function NotionFilterCondition({
   indexInGroup = 0,
   groupOperator = "and",
   onOperatorChange,
-}: NotionFilterConditionProps) {
+}: NotionFilterItemProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   // Get available columns for property selection
   const availableColumns = columnDefs.map((colDef) => {
@@ -540,3 +540,4 @@ export function NotionFilterCondition({
     </div>
   )
 }
+

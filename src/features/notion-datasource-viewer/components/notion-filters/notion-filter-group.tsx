@@ -9,7 +9,7 @@ import type {
   FilterCondition,
   FilterGroup,
 } from "@/features/notion-datasource-viewer/types/notion-filters"
-import { NotionFilterCondition } from "./notion-filter-condition"
+import { NotionFilterItem } from "./notion-filter-item"
 
 const NESTING_LEVEL_PADDING = 8
 
@@ -335,7 +335,7 @@ export function NotionFilterGroup({
           }
 
           return (
-            <NotionFilterCondition
+            <NotionFilterItem
               key={childPath.join("-")}
               condition={item}
               columnDefs={columnDefs}

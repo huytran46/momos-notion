@@ -4,7 +4,7 @@ import { useInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query"
 import { useMemo, useState } from "react"
 
 import { NotionDatasourceForm } from "./components/notion-datasource-form"
-import { NotionFilterConfigPopover } from "./components/notion-filter-config-popover"
+import { NotionFilterConfigPopover } from "./components/notion-filters/notion-filter-config-popover"
 import { NotionSortConfigPopover } from "./components/notion-sort-config-popover"
 import { NotionTable } from "./components/notion-table"
 import {

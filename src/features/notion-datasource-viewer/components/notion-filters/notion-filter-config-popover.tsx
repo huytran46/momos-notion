@@ -10,8 +10,8 @@ import type {
   FilterItem,
 } from "@/features/notion-datasource-viewer/types/notion-filters"
 import { canAddNestedGroupAtPath } from "@/utils/notion-filter-utils"
-import { NotionFilterCondition } from "./notion-filter-condition"
 import { NotionFilterGroup } from "./notion-filter-group"
+import { NotionFilterItem } from "./notion-filter-item"
 
 type AddFilterDropdownProps = {
   onAddOne: () => void
@@ -207,7 +207,7 @@ export function NotionFilterConfigPopover({
     }
 
     return (
-      <NotionFilterCondition
+      <NotionFilterItem
         key={path.join("-")}
         condition={item}
         columnDefs={columnDefs}
