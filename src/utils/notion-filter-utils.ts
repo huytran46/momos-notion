@@ -109,6 +109,47 @@ function calculateItemDepth(item: FilterItem, currentDepth: number): number {
 }
 
 /**
+ * Calculates nesting depth at a specific path in the filter structure
+ */
+export function calculateNestingDepthAtPath(
+  filter: AppFilter,
+  path: number[]
+): number {
+  if (!filter) {
+    return 0
+  }
+
+  return calculateDepthAtPath(filter, path, 0)
+}
+
+function calculateDepthAtPath(
+  item: FilterItem,
+  path: number[],
+  currentDepth: number
+): number {
+  if (path.length === 0) {
+    // We've reached the target path, return current depth
+    return currentDepth
+  }
+
+  if (item.type === "group") {
+    const [firstIndex, ...restPath] = path
+    const condition = item.conditions[firstIndex]
+
+    if (!condition) {
+      // Path doesn't exist, return current depth
+      return currentDepth
+    }
+
+    // Navigate deeper into the structure
+    return calculateDepthAtPath(condition, restPath, currentDepth + 1)
+  }
+
+  // If it's a condition and we still have path left, the path is invalid
+  return currentDepth
+}
+
+/**
  * Checks if a nested group can be added based on max depth
  */
 export function canAddNestedGroup(
@@ -117,6 +158,26 @@ export function canAddNestedGroup(
 ): boolean {
   const currentDepth = calculateNestingDepth(filter)
   return currentDepth < maxDepth
+}
+
+/**
+ * Checks if a nested group can be added at a specific path
+ */
+export function canAddNestedGroupAtPath(
+  filter: AppFilter,
+  path: number[],
+  maxDepth: number = 2
+): boolean {
+  // If no filters exist and we're adding at root, we're creating a root group (depth 0)
+  // A root group is always allowed as long as maxDepth >= 1
+  if (!filter && path.length === 0) {
+    return maxDepth >= 1
+  }
+
+  const depthAtPath = calculateNestingDepthAtPath(filter, path)
+  // Adding a group at this path would create depth = depthAtPath + 1
+  // (the new group would be nested one level deeper than the current path)
+  return depthAtPath + 1 < maxDepth
 }
 
 /**
