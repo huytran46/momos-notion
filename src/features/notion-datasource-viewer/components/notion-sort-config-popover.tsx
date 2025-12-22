@@ -66,7 +66,7 @@ function SortItem({
     <div
       ref={setNodeRef}
       style={style}
-      className="flex items-center gap-2 p-2 border border-hn-border bg-white hover:bg-hn-hover"
+      className="flex items-center gap-2 p-1 bg-white hover:bg-hn-hover"
     >
       <button
         type="button"
@@ -75,7 +75,7 @@ function SortItem({
         className="cursor-grab active:cursor-grabbing text-hn-text-secondary hover:text-hn-text"
         aria-label="Drag to reorder"
       >
-        ⋮⋮
+        🟰
       </button>
       <span className="flex-1 text-sm text-hn-text">{getColumnName(sort)}</span>
       <button
