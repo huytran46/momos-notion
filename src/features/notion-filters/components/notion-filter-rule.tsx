@@ -1,12 +1,11 @@
 "use client"
-
-import * as Popover from "@radix-ui/react-popover"
-import * as Select from "@radix-ui/react-select"
 import type { ColumnDef } from "@tanstack/react-table"
 import { useMemo, useState } from "react"
+import { Popover } from "@/components/ui/popover"
+import { Select } from "@/components/ui/select"
 import type {
   FilterablePropertyType,
-  FilterCondition,
+  FilterRule,
 } from "@/features/notion-filters/types/notion-filters"
 import {
   formatOperatorLabel,
@@ -19,12 +18,11 @@ import { NumberFilterEditor } from "./notion-filter-property-editors/number-filt
 import { RichTextFilterEditor } from "./notion-filter-property-editors/rich-text-filter-editor"
 import { SelectFilterEditor } from "./notion-filter-property-editors/select-filter-editor"
 import { StatusFilterEditor } from "./notion-filter-property-editors/status-filter-editor"
-import { TimestampFilterEditor } from "./notion-filter-property-editors/timestamp-filter-editor"
 
-type NotionFilterItemProps = {
-  condition: FilterCondition
+type NotionFilterRuleProps = {
+  condition: FilterRule
   columnDefs: ColumnDef<Record<string, unknown>>[]
-  onUpdate: (updates: Partial<FilterCondition>) => void
+  onUpdate: (updates: Partial<FilterRule>) => void
   onRemove: () => void
   onDuplicate: () => void
   // nestingLevel?: number
@@ -34,7 +32,7 @@ type NotionFilterItemProps = {
   onOperatorChange?: (operator: "and" | "or") => void
 }
 
-export function NotionFilterItem({
+export function NotionFilterRule({
   condition,
   columnDefs,
   onUpdate,
@@ -45,7 +43,7 @@ export function NotionFilterItem({
   indexInGroup = 0,
   groupOperator = "and",
   onOperatorChange,
-}: NotionFilterItemProps) {
+}: NotionFilterRuleProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   // Get available columns for property selection
   const availableColumns = columnDefs.map((colDef) => {
@@ -72,7 +70,8 @@ export function NotionFilterItem({
     condition.type === "property" &&
     (condition.property === "" || condition.propertyType === "")
 
-  // Get available operators based on current property/timestamp type
+  // Get available operators based on current property type
+  // All rules are now property-based (including timestamps)
   const availableOperators = useMemo(() => {
     if (condition.type === "property") {
       if (condition.propertyType === "") {
@@ -82,7 +81,7 @@ export function NotionFilterItem({
         condition.propertyType as FilterablePropertyType
       )
     }
-    return getAvailableOperators(condition.timestamp)
+    return []
   }, [condition])
 
   // Get options for select/multi_select/status
@@ -123,7 +122,7 @@ export function NotionFilterItem({
   }
 
   const handlePropertyOrTimestampChange = (value: string) => {
-    // Check if it's a timestamp
+    // Check if it's a timestamp (now treated as a property with timestamp propertyType)
     if (value === "created_time" || value === "last_edited_time") {
       const operators = getAvailableOperators(value)
       // For timestamp, operators are always DateOperator
@@ -143,15 +142,16 @@ export function NotionFilterItem({
         | "next_year"
 
       onUpdate({
-        type: "timestamp",
-        timestamp: value as "created_time" | "last_edited_time",
+        type: "property",
+        property: value, // Use timestamp name as property
+        propertyType: value as "created_time" | "last_edited_time", // Set propertyType to timestamp
         operator: defaultOperator,
         value: null,
-      } as Partial<FilterCondition>)
+      })
       return
     }
 
-    // It's a property
+    // It's a regular property
     const column = availableColumns.find((col) => col.id === value)
     if (!column || !column.propertyType) {
       return
@@ -172,7 +172,7 @@ export function NotionFilterItem({
 
   const handleOperatorChange = (operator: string) => {
     onUpdate({
-      operator: operator as FilterCondition["operator"],
+      operator: operator as FilterRule["operator"],
       // Reset value when operator changes to is_empty/is_not_empty
       value:
         operator === "is_empty" || operator === "is_not_empty"
@@ -181,7 +181,7 @@ export function NotionFilterItem({
     })
   }
 
-  const handleValueChange = (value: FilterCondition["value"]) => {
+  const handleValueChange = (value: FilterRule["value"]) => {
     onUpdate({ value })
   }
 
@@ -194,6 +194,7 @@ export function NotionFilterItem({
       return null
     }
 
+    // All rules are now property-based (including timestamps)
     if (condition.type === "property") {
       switch (condition.propertyType) {
         case "checkbox":
@@ -204,6 +205,8 @@ export function NotionFilterItem({
             />
           )
         case "date":
+        case "created_time":
+        case "last_edited_time":
           return (
             <DateFilterEditor
               value={condition.value}
@@ -249,19 +252,10 @@ export function NotionFilterItem({
               options={getOptions()}
             />
           )
+
         default:
           return null
       }
-    }
-
-    if (condition.type === "timestamp") {
-      return (
-        <TimestampFilterEditor
-          value={condition.value}
-          onChange={handleValueChange}
-          operator={condition.operator}
-        />
-      )
     }
 
     return null
@@ -283,16 +277,14 @@ export function NotionFilterItem({
             }
           }}
         >
-          <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0">
+          <Select.Trigger className="flex items-center justify-between min-w-0">
             <Select.Value className="flex-1 min-w-0" />
-            <Select.Icon className="text-hn-text-secondary shrink-0">
-              ▼
-            </Select.Icon>
+            <Select.Icon />
           </Select.Trigger>
           <Select.Portal>
-            <Select.Content className="bg-white border border-hn-border shadow-none">
-              <Select.ScrollUpButton className="hidden" />
-              <Select.Viewport className="p-1">
+            <Select.Content>
+              <Select.ScrollUpButton />
+              <Select.Viewport>
                 <Select.Item
                   value="and"
                   className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
@@ -306,7 +298,7 @@ export function NotionFilterItem({
                   <Select.ItemText>Or</Select.ItemText>
                 </Select.Item>
               </Select.Viewport>
-              <Select.ScrollDownButton className="hidden" />
+              <Select.ScrollDownButton />
             </Select.Content>
           </Select.Portal>
         </Select.Root>
@@ -324,81 +316,24 @@ export function NotionFilterItem({
   return (
     <div className="flex flex-col gap-1 bg-white">
       <div className="flex items-center gap-2">
-        <span>{renderOperatorLabel()}</span>
+        <span className="min-w-16 flex justify-end">
+          {renderOperatorLabel()}
+        </span>
 
         {isIncomplete ? (
           // Incomplete state: show combined property/timestamp selector
-          <Select.Root value="" onValueChange={handlePropertyOrTimestampChange}>
-            <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between">
-              <Select.Value
-                placeholder="Select property or timestamp"
-                className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
-              />
-              <Select.Icon className="text-hn-text-secondary shrink-0 ml-auto">
-                ▼
-              </Select.Icon>
-            </Select.Trigger>
-            <Select.Portal>
-              <Select.Content className="bg-white border border-hn-border shadow-none">
-                <Select.ScrollUpButton className="hidden" />
-                <Select.Viewport className="p-1">
-                  <Select.Group>
-                    <Select.Label className="px-2 py-1 text-xs text-hn-text-secondary">
-                      Properties
-                    </Select.Label>
-                    {availableColumns
-                      .filter((col) => col.propertyType)
-                      .map((column) => (
-                        <Select.Item
-                          key={column.id}
-                          value={column.id}
-                          className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
-                        >
-                          <Select.ItemText>{column.header}</Select.ItemText>
-                        </Select.Item>
-                      ))}
-                  </Select.Group>
-                  <Select.Group>
-                    <Select.Label className="px-2 py-1 text-xs text-hn-text-secondary">
-                      Timestamps
-                    </Select.Label>
-                    <Select.Item
-                      value="created_time"
-                      className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
-                    >
-                      <Select.ItemText>Created time</Select.ItemText>
-                    </Select.Item>
-                    <Select.Item
-                      value="last_edited_time"
-                      className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
-                    >
-                      <Select.ItemText>Last edited time</Select.ItemText>
-                    </Select.Item>
-                  </Select.Group>
-                </Select.Viewport>
-                <Select.ScrollDownButton className="hidden" />
-              </Select.Content>
-            </Select.Portal>
-          </Select.Root>
-        ) : condition.type === "property" ? (
-          // Property filter: show property selector
-          <Select.Root
-            value={condition.property}
-            onValueChange={handlePropertyOrTimestampChange}
-          >
-            <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between">
+          <Select.Root onValueChange={handlePropertyOrTimestampChange}>
+            <Select.Trigger className="inline-flex items-center justify-between">
               <Select.Value
                 placeholder="Select property"
                 className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
               />
-              <Select.Icon className="text-hn-text-secondary shrink-0">
-                ▼
-              </Select.Icon>
+              <Select.Icon className="ml-auto" />
             </Select.Trigger>
             <Select.Portal>
-              <Select.Content className="bg-white border border-hn-border shadow-none">
-                <Select.ScrollUpButton className="hidden" />
-                <Select.Viewport className="p-1">
+              <Select.Content>
+                <Select.ScrollUpButton />
+                <Select.Viewport>
                   {availableColumns
                     .filter((col) => col.propertyType)
                     .map((column) => (
@@ -410,30 +345,7 @@ export function NotionFilterItem({
                         <Select.ItemText>{column.header}</Select.ItemText>
                       </Select.Item>
                     ))}
-                </Select.Viewport>
-                <Select.ScrollDownButton className="hidden" />
-              </Select.Content>
-            </Select.Portal>
-          </Select.Root>
-        ) : (
-          // Timestamp filter: show timestamp selector
-          <Select.Root
-            value={condition.timestamp}
-            onValueChange={handlePropertyOrTimestampChange}
-          >
-            <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between">
-              <Select.Value
-                placeholder="Select timestamp"
-                className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
-              />
-              <Select.Icon className="text-hn-text-secondary shrink-0">
-                ▼
-              </Select.Icon>
-            </Select.Trigger>
-            <Select.Portal>
-              <Select.Content className="bg-white border border-hn-border shadow-none">
-                <Select.ScrollUpButton className="hidden" />
-                <Select.Viewport className="p-1">
+                  {/* Add timestamp options */}
                   <Select.Item
                     value="created_time"
                     className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
@@ -447,7 +359,53 @@ export function NotionFilterItem({
                     <Select.ItemText>Last edited time</Select.ItemText>
                   </Select.Item>
                 </Select.Viewport>
-                <Select.ScrollDownButton className="hidden" />
+                <Select.ScrollDownButton />
+              </Select.Content>
+            </Select.Portal>
+          </Select.Root>
+        ) : (
+          // Property filter: show property selector (all rules are now properties, including timestamps)
+          <Select.Root
+            value={condition.property}
+            onValueChange={handlePropertyOrTimestampChange}
+          >
+            <Select.Trigger className="inline-flex items-center justify-between">
+              <Select.Value
+                placeholder="Select property"
+                className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
+              />
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Portal>
+              <Select.Content>
+                <Select.ScrollUpButton />
+                <Select.Viewport>
+                  {availableColumns
+                    .filter((col) => col.propertyType)
+                    .map((column) => (
+                      <Select.Item
+                        key={column.id}
+                        value={column.id}
+                        className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
+                      >
+                        <Select.ItemText>{column.header}</Select.ItemText>
+                      </Select.Item>
+                    ))}
+                  {/* Add timestamp options */}
+                  <Select.Item
+                    value="created_time"
+                    className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
+                  >
+                    <Select.ItemText>Created time</Select.ItemText>
+                  </Select.Item>
+                  <Select.Item
+                    value="last_edited_time"
+                    className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
+                  >
+                    <Select.ItemText>Last edited time</Select.ItemText>
+                  </Select.Item>
+                </Select.Viewport>
+                <Select.ScrollDownButton />
               </Select.Content>
             </Select.Portal>
           </Select.Root>
@@ -459,19 +417,17 @@ export function NotionFilterItem({
               value={condition.operator}
               onValueChange={handleOperatorChange}
             >
-              <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between">
+              <Select.Trigger className="inline-flex items-center justify-between">
                 <Select.Value
                   placeholder="Select operator"
                   className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
                 />
-                <Select.Icon className="text-hn-text-secondary shrink-0">
-                  ▼
-                </Select.Icon>
+                <Select.Icon />
               </Select.Trigger>
               <Select.Portal>
-                <Select.Content className="bg-white border border-hn-border shadow-none">
-                  <Select.ScrollUpButton className="hidden" />
-                  <Select.Viewport className="p-1">
+                <Select.Content>
+                  <Select.ScrollUpButton />
+                  <Select.Viewport>
                     {availableOperators.map((operator) => (
                       <Select.Item
                         key={operator}
@@ -484,7 +440,7 @@ export function NotionFilterItem({
                       </Select.Item>
                     ))}
                   </Select.Viewport>
-                  <Select.ScrollDownButton className="hidden" />
+                  <Select.ScrollDownButton />
                 </Select.Content>
               </Select.Portal>
             </Select.Root>
@@ -505,10 +461,7 @@ export function NotionFilterItem({
               </button>
             </Popover.Trigger>
             <Popover.Portal>
-              <Popover.Content
-                align="end"
-                className="w-40 p-1 bg-white border border-hn-border shadow-none"
-              >
+              <Popover.Content align="end" className="w-40 p-1">
                 <div className="space-y-1">
                   <button
                     type="button"
@@ -531,7 +484,7 @@ export function NotionFilterItem({
                     Remove
                   </button>
                 </div>
-                <Popover.Arrow className="fill-white" />
+                <Popover.Arrow />
               </Popover.Content>
             </Popover.Portal>
           </Popover.Root>

@@ -1,17 +1,15 @@
 "use client"
 
-import * as Popover from "@radix-ui/react-popover"
-import * as Select from "@radix-ui/react-select"
 import * as Tooltip from "@radix-ui/react-tooltip"
 import type { ColumnDef } from "@tanstack/react-table"
 import { useState } from "react"
+import { Popover } from "@/components/ui/popover"
+import { Select } from "@/components/ui/select"
 import type {
-  FilterCondition,
   FilterGroup,
+  FilterRule,
 } from "@/features/notion-filters/types/notion-filters"
-import { NotionFilterItem } from "./notion-filter-item"
-
-const NESTING_LEVEL_PADDING = 8
+import { NotionFilterRule } from "./notion-filter-rule"
 
 // Color palette for filter group borders (6 colors that cycle based on nesting level)
 const FILTER_GROUP_BORDER_COLORS = [
@@ -56,23 +54,21 @@ function GroupOperatorRow({
 
   return (
     <div
-      className="flex items-center gap-2 justify-between"
+      className="flex items-center"
       style={{ paddingLeft: `${paddingLeft}px` }}
     >
       {showOperator && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 min-w-16 justify-end">
           {isEditable ? (
             <Select.Root value={operator} onValueChange={onOperatorChange}>
-              <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between">
+              <Select.Trigger className="inline-flex items-center justify-between">
                 <Select.Value className="flex-1 min-w-0" />
-                <Select.Icon className="text-hn-text-secondary shrink-0">
-                  ▼
-                </Select.Icon>
+                <Select.Icon />
               </Select.Trigger>
               <Select.Portal>
-                <Select.Content className="bg-white border border-hn-border shadow-none">
-                  <Select.ScrollUpButton className="hidden" />
-                  <Select.Viewport className="p-1">
+                <Select.Content>
+                  <Select.ScrollUpButton />
+                  <Select.Viewport>
                     <Select.Item
                       value="and"
                       className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
@@ -86,7 +82,7 @@ function GroupOperatorRow({
                       <Select.ItemText>Or</Select.ItemText>
                     </Select.Item>
                   </Select.Viewport>
-                  <Select.ScrollDownButton className="hidden" />
+                  <Select.ScrollDownButton />
                 </Select.Content>
               </Select.Portal>
             </Select.Root>
@@ -97,21 +93,19 @@ function GroupOperatorRow({
           )}
         </div>
       )}
+
       <Popover.Root open={menuOpen} onOpenChange={setMenuOpen}>
         <Popover.Trigger asChild>
           <button
             type="button"
-            className="px-2 py-1 text-xs bg-white hover:bg-hn-hover text-hn-text"
+            className="ml-auto px-2 py-1 text-xs bg-white hover:bg-hn-hover text-hn-text"
             aria-label="More options"
           >
             ⋯
           </button>
         </Popover.Trigger>
         <Popover.Portal>
-          <Popover.Content
-            align="end"
-            className="w-40 p-1 bg-white border border-hn-border shadow-none"
-          >
+          <Popover.Content align="end" className="w-40 p-1">
             <div className="space-y-1">
               <button
                 type="button"
@@ -134,7 +128,7 @@ function GroupOperatorRow({
                 Remove
               </button>
             </div>
-            <Popover.Arrow className="fill-white" />
+            <Popover.Arrow />
           </Popover.Content>
         </Popover.Portal>
       </Popover.Root>
@@ -170,10 +164,7 @@ function AddFilterDropdown({
         </button>
       </Popover.Trigger>
       <Popover.Portal>
-        <Popover.Content
-          align="start"
-          className="w-40 p-1 bg-white border border-hn-border shadow-none"
-        >
+        <Popover.Content align="start" className="w-40 p-1">
           <div className="space-y-1">
             <button
               type="button"
@@ -220,7 +211,7 @@ function AddFilterDropdown({
               </button>
             )}
           </div>
-          <Popover.Arrow className="fill-white" />
+          <Popover.Arrow />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
@@ -236,11 +227,11 @@ type NotionFilterGroupProps = {
   // indexInGroup?: number
   // groupOperator?: "and" | "or"
   onToggleOperator: (path: number[]) => void
-  onAddFilter: (path: number[], condition: FilterCondition) => void
+  onAddFilter: (path: number[], rule: FilterRule) => void
   onAddFilterClick: (path: number[]) => void
   onAddGroupClick: (path: number[]) => void
   onRemoveFilter: (path: number[]) => void
-  onUpdateFilter: (path: number[], updates: Partial<FilterCondition>) => void
+  onUpdateFilter: (path: number[], updates: Partial<FilterRule>) => void
   onRemoveGroup: (path: number[]) => void
   onDuplicateGroup: (path: number[]) => void
   onDuplicateFilter: (path: number[]) => void
@@ -267,7 +258,7 @@ export function NotionFilterGroup({
   onAddGroupToPath,
 }: NotionFilterGroupProps) {
   const isRootGroup = nestingLevel === 0
-  const canAddGroup = nestingLevel + 1 < maxNestingDepth
+  const canAddGroup = nestingLevel < maxNestingDepth
   const borderColor = isRootGroup
     ? undefined
     : getFilterGroupBorderColor(nestingLevel)
@@ -277,7 +268,7 @@ export function NotionFilterGroup({
 
   return (
     <div
-      className={`relative space-y-2 ${isRootGroup ? "" : "border-l"} bg-white`}
+      className={`relative space-y-2 ${isRootGroup ? "" : "border-l ml-14 pl-2"}`}
       style={borderColor ? { borderLeftColor: borderColor } : undefined}
     >
       {/* Level indicator */}
@@ -286,12 +277,12 @@ export function NotionFilterGroup({
           className="absolute top-1 left-1 text-[8px] leading-none"
           style={{ color: borderColor }}
         >
-          {nestingLevel + 1}
+          {nestingLevel}
         </span>
       )}
 
-      <div className={`space-y-2${isRootGroup ? "" : " pl-6"}`}>
-        {group.conditions.map((item, index) => {
+      <div className="space-y-2">
+        {group.nodes.map((item, index) => {
           const childPath = [...path, index]
 
           if (item.type === "group") {
@@ -335,7 +326,7 @@ export function NotionFilterGroup({
           }
 
           return (
-            <NotionFilterItem
+            <NotionFilterRule
               key={childPath.join("-")}
               condition={item}
               columnDefs={columnDefs}

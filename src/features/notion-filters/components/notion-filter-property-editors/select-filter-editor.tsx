@@ -1,6 +1,6 @@
 "use client"
 
-import * as Select from "@radix-ui/react-select"
+import { Select } from "@/components/ui/select"
 import type { FilterValue } from "@/features/notion-filters/types/notion-filters"
 
 type SelectFilterEditorProps = {
@@ -24,17 +24,17 @@ export function SelectFilterEditor({
       onValueChange={(newValue) => onChange(newValue)}
       disabled={disabled}
     >
-      <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between disabled:opacity-50 disabled:cursor-not-allowed">
+      <Select.Trigger className="inline-flex items-center justify-between">
         <Select.Value
           placeholder="Select option"
           className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
         />
-        <Select.Icon className="text-hn-text-secondary shrink-0">▼</Select.Icon>
+        <Select.Icon />
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content className="bg-white border border-hn-border shadow-none">
-          <Select.ScrollUpButton className="hidden" />
-          <Select.Viewport className="p-1">
+        <Select.Content>
+          <Select.ScrollUpButton />
+          <Select.Viewport>
             {options.map((option) => (
               <Select.Item
                 key={option.name}
@@ -45,7 +45,7 @@ export function SelectFilterEditor({
               </Select.Item>
             ))}
           </Select.Viewport>
-          <Select.ScrollDownButton className="hidden" />
+          <Select.ScrollDownButton />
         </Select.Content>
       </Select.Portal>
     </Select.Root>

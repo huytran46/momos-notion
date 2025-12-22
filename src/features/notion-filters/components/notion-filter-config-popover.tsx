@@ -1,17 +1,16 @@
 "use client"
 
-import * as Popover from "@radix-ui/react-popover"
 import * as Tooltip from "@radix-ui/react-tooltip"
 import type { ColumnDef } from "@tanstack/react-table"
 import { useState } from "react"
+import { Popover } from "@/components/ui/popover"
 import type {
-  AppFilter,
-  FilterCondition,
-  FilterItem,
+  CompoundFilter,
+  FilterNode,
+  FilterRule,
 } from "@/features/notion-filters/types/notion-filters"
-import { canAddNestedGroupAtPath } from "@/features/notion-filters/utils/notion-filter-utils"
 import { NotionFilterGroup } from "./notion-filter-group"
-import { NotionFilterItem } from "./notion-filter-item"
+import { NotionFilterRule } from "./notion-filter-rule"
 
 type AddFilterDropdownProps = {
   onAddOne: () => void
@@ -37,10 +36,7 @@ function AddFilterDropdown({
         </button>
       </Popover.Trigger>
       <Popover.Portal>
-        <Popover.Content
-          align="start"
-          className="w-40 p-1 bg-white border border-hn-border shadow-none"
-        >
+        <Popover.Content align="start" className="w-40 p-1">
           <div className="space-y-1">
             <button
               type="button"
@@ -86,7 +82,7 @@ function AddFilterDropdown({
               </button>
             )}
           </div>
-          <Popover.Arrow className="fill-white" />
+          <Popover.Arrow />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
@@ -94,18 +90,18 @@ function AddFilterDropdown({
 }
 
 type NotionFilterConfigPopoverProps = {
-  filters: AppFilter
+  filters: CompoundFilter
   columnDefs: ColumnDef<Record<string, unknown>>[]
   maxNestingDepth: number
   hasUnsavedChanges?: boolean
   onMaxNestingDepthChange: (depth: number) => void
-  onAddFilter: (condition: FilterCondition) => void
+  onAddFilter: (rule: FilterRule) => void
   onRemoveFilter: (path: number[]) => void
   onToggleGroupOperator: (path: number[]) => void
   onAddGroup: (operator: "and" | "or") => void
-  onAddFilterToGroup: (path: number[], condition: FilterCondition) => void
+  onAddFilterToGroup: (path: number[], rule: FilterRule) => void
   onAddGroupToPath: (path: number[], operator: "and" | "or") => void
-  onUpdateFilter: (path: number[], updates: Partial<FilterCondition>) => void
+  onUpdateFilter: (path: number[], updates: Partial<FilterRule>) => void
   onDuplicateFilter: (path: number[]) => void
   onApplyFilters: () => void
   onResetFilters: () => void
@@ -131,8 +127,8 @@ export function NotionFilterConfigPopover({
   const [open, setOpen] = useState(false)
 
   const handleAddFilterClick = (path: number[] = []) => {
-    // Create an empty/incomplete filter condition immediately
-    const emptyCondition: FilterCondition = {
+    // Create an empty/incomplete filter rule immediately
+    const emptyRule: FilterRule = {
       type: "property",
       property: "",
       propertyType: "",
@@ -144,21 +140,21 @@ export function NotionFilterConfigPopover({
     // Otherwise, use onAddFilter which will handle creating a group if needed
     if (path.length === 0) {
       if (filters && filters.type === "group") {
-        onAddFilterToGroup([], emptyCondition)
+        onAddFilterToGroup([], emptyRule)
       } else {
-        onAddFilter(emptyCondition)
+        onAddFilter(emptyRule)
       }
     } else {
-      onAddFilterToGroup(path, emptyCondition)
+      onAddFilterToGroup(path, emptyRule)
     }
   }
 
   const handleAddGroupClick = (path: number[] = []) => {
-    // Check if adding a group at this path would exceed max nesting depth
-    if (!canAddNestedGroupAtPath(filters, path, maxNestingDepth)) {
-      // Cannot add group - max depth would be exceeded
-      return
-    }
+    // // Check if adding a group at this path would exceed max nesting depth
+    // if (!canAddNestedGroupAtPath(filters, path, maxNestingDepth)) {
+    //   // Cannot add group - max depth would be exceeded
+    //   return
+    // }
 
     if (path.length === 0) {
       // Add group at root level
@@ -178,16 +174,16 @@ export function NotionFilterConfigPopover({
     }
   }
 
-  const renderFilterItem = (
-    item: FilterItem,
+  const renderFilterNode = (
+    node: FilterNode,
     path: number[] = [],
     nestingLevel: number = 0
   ) => {
-    if (item.type === "group") {
+    if (node.type === "group") {
       return (
         <NotionFilterGroup
           key={path.join("-")}
-          group={item}
+          group={node}
           columnDefs={columnDefs}
           nestingLevel={nestingLevel}
           maxNestingDepth={maxNestingDepth}
@@ -207,9 +203,9 @@ export function NotionFilterConfigPopover({
     }
 
     return (
-      <NotionFilterItem
+      <NotionFilterRule
         key={path.join("-")}
-        condition={item}
+        condition={node}
         columnDefs={columnDefs}
         onUpdate={(updates) => onUpdateFilter(path, updates)}
         onRemove={() => onRemoveFilter(path)}
@@ -221,20 +217,25 @@ export function NotionFilterConfigPopover({
     )
   }
 
+  const hasFilters = Boolean(filters)
+
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <button
           type="button"
-          className="px-3 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text"
+          className="relative px-3 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text"
         >
           Filter
+          {hasFilters && (
+            <span className="absolute -top-1 -right-1 size-2 rounded-full bg-hn-orange" />
+          )}
         </button>
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
           align="start"
-          className="min-w-[400px] max-w-[70vw] w-auto p-3 bg-white border border-hn-border shadow-none max-h-[600px] overflow-y-auto"
+          className="min-w-[400px] max-w-[70vw] w-auto p-3 max-h-[600px] overflow-y-auto"
         >
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -260,7 +261,7 @@ export function NotionFilterConfigPopover({
 
             {filters ? (
               <div className="space-y-2">
-                {renderFilterItem(filters, [], 0)}
+                {renderFilterNode(filters, [], 0)}
               </div>
             ) : (
               <div className="text-sm text-hn-text-secondary py-2">
@@ -295,7 +296,7 @@ export function NotionFilterConfigPopover({
               </div>
             </div>
           </div>
-          <Popover.Arrow className="fill-white" />
+          <Popover.Arrow />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
