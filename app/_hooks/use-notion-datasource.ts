@@ -1,12 +1,12 @@
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query"
 import type { ColumnDef } from "@tanstack/react-table"
-import type { AppFilter } from "@/features/notion-filters/types/notion-filters"
+import type { CompoundFilter } from "@/features/notion-filters/types/notion-filters"
 import type { NotionSort } from "@/features/notion-sort/types/notion-sort"
 
 export type NotionDatasourceQueryParams = {
   cursor?: string | null
   pageSize?: number
-  filter?: AppFilter
+  filter?: CompoundFilter
   sorts?: NotionSort[]
 }
 

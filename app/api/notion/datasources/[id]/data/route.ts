@@ -5,7 +5,7 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
-import type { AppFilter } from "@/features/notion-filters/types/notion-filters"
+import type { CompoundFilter } from "@/features/notion-filters/types/notion-filters"
 import {
   convertToNotionApiFormat,
   validateNotionFilter,
@@ -18,7 +18,7 @@ type NotionSort =
       direction: "ascending" | "descending"
     }
   | {
-      timestamp: "created_time" | "last_edited_time" | "last_visited_time"
+      timestamp: "created_time" | "last_edited_time"
       direction: "ascending" | "descending"
     }
 
@@ -53,12 +53,12 @@ export async function GET(request: NextRequest) {
     const pageSizeParam = searchParams.get("pageSize")
     const pageSize = pageSizeParam ? Number.parseInt(pageSizeParam, 10) : 50
 
-    let clientFilter: AppFilter | undefined
+    let clientFilter: CompoundFilter | undefined
 
     const filterParam = searchParams.get("filter")
     if (filterParam) {
       try {
-        clientFilter = JSON.parse(filterParam) as AppFilter
+        clientFilter = JSON.parse(filterParam) as CompoundFilter
       } catch {
         return NextResponse.json(
           { error: "Invalid filter parameter" },

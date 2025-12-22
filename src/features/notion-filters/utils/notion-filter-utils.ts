@@ -4,14 +4,16 @@
  */
 
 import type {
-  AppFilter,
+  CompoundFilter,
   FilterablePropertyType,
-  FilterCondition,
   FilterGroup,
-  FilterItem,
+  FilterNode,
   FilterOperator,
+  FilterRule,
+  PropertyFilterRule,
   TimestampType,
 } from "@/features/notion-filters/types/notion-filters"
+import { isTimestampType } from "@/features/notion-filters/types/notion-filters"
 
 // ============================================================================
 // CLIENT-SIDE UTILITIES
@@ -20,7 +22,7 @@ import type {
 /**
  * Validates filter structure
  */
-export function validateFilterStructure(filter: AppFilter): {
+export function validateFilterStructure(filter: CompoundFilter): {
   valid: boolean
   error?: string
 } {
@@ -28,20 +30,20 @@ export function validateFilterStructure(filter: AppFilter): {
     return { valid: true }
   }
 
-  return validateFilterItem(filter)
+  return validateFilterNode(filter)
 }
 
-function validateFilterItem(item: FilterItem): {
+function validateFilterNode(node: FilterNode): {
   valid: boolean
   error?: string
 } {
-  if (item.type === "group") {
-    if (item.conditions.length === 0) {
+  if (node.type === "group") {
+    if (node.nodes.length === 0) {
       return { valid: false, error: "Filter group cannot be empty" }
     }
 
-    for (const condition of item.conditions) {
-      const result = validateFilterItem(condition)
+    for (const childNode of node.nodes) {
+      const result = validateFilterNode(childNode)
       if (!result.valid) {
         return result
       }
@@ -49,34 +51,23 @@ function validateFilterItem(item: FilterItem): {
     return { valid: true }
   }
 
-  // Validate condition
-  if (item.type === "property") {
-    if (!item.property || item.property === "") {
+  // Validate rule (all rules are now property-based, including timestamps)
+  if (node.type === "property") {
+    if (!node.property || node.property === "") {
       return { valid: false, error: "Property name is required" }
     }
-    const propertyTypeStr = String(item.propertyType)
+    const propertyTypeStr = String(node.propertyType)
     if (!propertyTypeStr || propertyTypeStr === "") {
       return { valid: false, error: "Property type is required" }
     }
-    if (!item.operator) {
+    if (!node.operator) {
       return { valid: false, error: "Operator is required" }
     }
     // Value validation depends on operator
     if (
-      item.operator !== "is_empty" &&
-      item.operator !== "is_not_empty" &&
-      item.value === null
-    ) {
-      return { valid: false, error: "Value is required for this operator" }
-    }
-  } else if (item.type === "timestamp") {
-    if (!item.operator) {
-      return { valid: false, error: "Operator is required" }
-    }
-    if (
-      item.operator !== "is_empty" &&
-      item.operator !== "is_not_empty" &&
-      item.value === null
+      node.operator !== "is_empty" &&
+      node.operator !== "is_not_empty" &&
+      node.value === null
     ) {
       return { valid: false, error: "Value is required for this operator" }
     }
@@ -88,18 +79,18 @@ function validateFilterItem(item: FilterItem): {
 /**
  * Calculates current nesting depth of a filter
  */
-export function calculateNestingDepth(filter: AppFilter): number {
+export function calculateNestingDepth(filter: CompoundFilter): number {
   if (!filter) {
     return 0
   }
 
-  return calculateItemDepth(filter, 0)
+  return calculateNodeDepth(filter, 0)
 }
 
-function calculateItemDepth(item: FilterItem, currentDepth: number): number {
-  if (item.type === "group") {
-    const maxChildDepth = item.conditions.reduce((max, condition) => {
-      const depth = calculateItemDepth(condition, currentDepth + 1)
+function calculateNodeDepth(node: FilterNode, currentDepth: number): number {
+  if (node.type === "group") {
+    const maxChildDepth = node.nodes.reduce((max, childNode) => {
+      const depth = calculateNodeDepth(childNode, currentDepth + 1)
       return Math.max(max, depth)
     }, currentDepth + 1)
     return maxChildDepth
@@ -112,7 +103,7 @@ function calculateItemDepth(item: FilterItem, currentDepth: number): number {
  * Calculates nesting depth at a specific path in the filter structure
  */
 export function calculateNestingDepthAtPath(
-  filter: AppFilter,
+  filter: CompoundFilter,
   path: number[]
 ): number {
   if (!filter) {
@@ -123,7 +114,7 @@ export function calculateNestingDepthAtPath(
 }
 
 function calculateDepthAtPath(
-  item: FilterItem,
+  node: FilterNode,
   path: number[],
   currentDepth: number
 ): number {
@@ -132,20 +123,20 @@ function calculateDepthAtPath(
     return currentDepth
   }
 
-  if (item.type === "group") {
+  if (node.type === "group") {
     const [firstIndex, ...restPath] = path
-    const condition = item.conditions[firstIndex]
+    const childNode = node.nodes[firstIndex]
 
-    if (!condition) {
+    if (!childNode) {
       // Path doesn't exist, return current depth
       return currentDepth
     }
 
     // Navigate deeper into the structure
-    return calculateDepthAtPath(condition, restPath, currentDepth + 1)
+    return calculateDepthAtPath(childNode, restPath, currentDepth + 1)
   }
 
-  // If it's a condition and we still have path left, the path is invalid
+  // If it's a rule and we still have path left, the path is invalid
   return currentDepth
 }
 
@@ -153,7 +144,7 @@ function calculateDepthAtPath(
  * Checks if a nested group can be added based on max depth
  */
 export function canAddNestedGroup(
-  filter: AppFilter,
+  filter: CompoundFilter,
   maxDepth: number = 2
 ): boolean {
   const currentDepth = calculateNestingDepth(filter)
@@ -164,7 +155,7 @@ export function canAddNestedGroup(
  * Checks if a nested group can be added at a specific path
  */
 export function canAddNestedGroupAtPath(
-  filter: AppFilter,
+  filter: CompoundFilter,
   path: number[],
   maxDepth: number = 2
 ): boolean {
@@ -177,11 +168,13 @@ export function canAddNestedGroupAtPath(
   const depthAtPath = calculateNestingDepthAtPath(filter, path)
   // Adding a group at this path would create depth = depthAtPath + 1
   // (the new group would be nested one level deeper than the current path)
-  return depthAtPath + 1 < maxDepth
+  // Use <= instead of < to allow creating groups up to maxDepth
+  return depthAtPath + 1 <= maxDepth
 }
 
 /**
  * Returns available operators for a property type
+ * - Treats date and timestamp types uniformly since they share the same operators
  */
 export function getAvailableOperators(
   propertyType: FilterablePropertyType | TimestampType
@@ -271,10 +264,10 @@ export function formatOperatorLabel(operator: FilterOperator): string {
 }
 
 /**
- * Validates a single filter condition
+ * Validates a single filter rule
  */
-export function isValidFilterCondition(condition: FilterCondition): boolean {
-  const result = validateFilterItem(condition)
+export function isValidFilterRule(rule: FilterRule): boolean {
+  const result = validateFilterNode(rule)
   return result.valid
 }
 
@@ -286,40 +279,61 @@ export function isValidFilterCondition(condition: FilterCondition): boolean {
  * Main conversion function - converts client filter to Notion API format
  */
 export function convertToNotionApiFormat(
-  clientFilter: AppFilter
+  clientFilter: CompoundFilter
 ): Record<string, unknown> | undefined {
   if (!clientFilter) {
     return undefined
   }
 
-  return convertFilterItem(clientFilter)
+  return convertFilterNode(clientFilter)
 }
 
-function convertFilterItem(item: FilterItem): Record<string, unknown> {
-  if (item.type === "group") {
-    return convertCompoundFilter(item)
+function convertFilterNode(node: FilterNode): Record<string, unknown> {
+  if (node.type === "group") {
+    return convertCompoundFilter(node)
   }
 
-  if (item.type === "property") {
-    return convertPropertyFilter(item)
-  }
-
-  if (item.type === "timestamp") {
-    return convertTimestampFilter(item)
+  if (node.type === "property") {
+    // Check if it's a timestamp property type
+    const propertyType = String(node.propertyType)
+    if (
+      propertyType === "created_time" ||
+      propertyType === "last_edited_time"
+    ) {
+      return convertTimestampPropertyFilter(
+        node as PropertyFilterRule & {
+          propertyType: "created_time" | "last_edited_time"
+        }
+      )
+    }
+    return convertPropertyFilter(
+      node as PropertyFilterRule & {
+        propertyType: Exclude<
+          FilterablePropertyType,
+          "created_time" | "last_edited_time"
+        >
+      }
+    )
   }
 
   throw new Error(
-    `Unknown filter item type: ${(item as { type: string }).type}`
+    `Unknown filter node type: ${(node as { type: string }).type}`
   )
 }
 
 /**
  * Convert property filters to Notion API structure
+ * Note: Timestamp property types are handled separately by convertTimestampPropertyFilter
  */
 function convertPropertyFilter(
-  condition: Extract<FilterCondition, { type: "property" }>
+  rule: PropertyFilterRule & {
+    propertyType: Exclude<
+      FilterablePropertyType,
+      "created_time" | "last_edited_time"
+    >
+  }
 ): Record<string, unknown> {
-  const { property, propertyType, operator, value } = condition
+  const { property, propertyType, operator, value } = rule
 
   // Skip incomplete filters
   const propertyTypeStr = String(propertyType)
@@ -332,8 +346,11 @@ function convertPropertyFilter(
     throw new Error("Cannot convert incomplete filter condition")
   }
 
-  // Type assertion for propertyType (we've validated it's not empty)
-  const validPropertyType = propertyTypeStr as FilterablePropertyType
+  // Type assertion for propertyType (we've validated it's not empty and not a timestamp)
+  const validPropertyType = propertyTypeStr as Exclude<
+    FilterablePropertyType,
+    "created_time" | "last_edited_time"
+  >
 
   const filterObject: Record<string, unknown> = {
     property,
@@ -419,15 +436,18 @@ function convertPropertyFilter(
 }
 
 /**
- * Convert timestamp filters to Notion API structure
+ * Convert timestamp property filters to Notion API structure
+ * Timestamps are now treated as properties with propertyType "created_time" or "last_edited_time"
  */
-function convertTimestampFilter(
-  condition: Extract<FilterCondition, { type: "timestamp" }>
+function convertTimestampPropertyFilter(
+  rule: PropertyFilterRule & {
+    propertyType: "created_time" | "last_edited_time"
+  }
 ): Record<string, unknown> {
-  const { timestamp, operator, value } = condition
+  const { propertyType, operator, value } = rule
 
   const filterObject: Record<string, unknown> = {
-    timestamp,
+    timestamp: propertyType, // Notion API uses "timestamp" key
   }
 
   // Build the date filter condition
@@ -477,7 +497,7 @@ function convertTimestampFilter(
       throw new Error(`Unknown date operator: ${operator}`)
   }
 
-  filterObject[timestamp] = dateFilter
+  filterObject[propertyType] = dateFilter
 
   return filterObject
 }
@@ -486,14 +506,12 @@ function convertTimestampFilter(
  * Convert compound filters (and/or groups) to Notion API structure
  */
 function convertCompoundFilter(group: FilterGroup): Record<string, unknown> {
-  const { operator, conditions } = group
+  const { operator, nodes } = group
 
-  const convertedConditions = conditions.map((condition) =>
-    convertFilterItem(condition)
-  )
+  const convertedNodes = nodes.map((node) => convertFilterNode(node))
 
   return {
-    [operator]: convertedConditions,
+    [operator]: convertedNodes,
   }
 }
 
@@ -538,14 +556,10 @@ export function validateNotionFilter(notionFilter: Record<string, unknown>): {
     return { valid: true }
   }
 
-  // Check if it's a timestamp filter
+  // Check if it's a timestamp filter (Notion API format)
   if ("timestamp" in notionFilter) {
     const timestamp = notionFilter.timestamp
-    if (
-      timestamp !== "created_time" &&
-      timestamp !== "last_edited_time" &&
-      timestamp !== "last_visited_time"
-    ) {
+    if (typeof timestamp !== "string" || !isTimestampType(timestamp)) {
       return {
         valid: false,
         error: `Invalid timestamp type: ${timestamp}`,

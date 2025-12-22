@@ -1,11 +1,11 @@
 import { useControllableState } from "@radix-ui/react-use-controllable-state"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import type {
-  AppFilter,
-  FilterCondition,
+  CompoundFilter,
   FilterGroup,
   FilterGroupOperator,
-  FilterItem,
+  FilterNode,
+  FilterRule,
 } from "@/features/notion-filters/types/notion-filters"
 import {
   calculateNestingDepth,
@@ -21,9 +21,9 @@ export function useFilterState({
   defaultMaxNestingDepth = 2,
   onMaxNestingDepthChange: onMaxNestingDepthChangeProp,
 }: {
-  filters?: AppFilter
-  defaultFilters?: AppFilter
-  onFiltersChange?: (filters: AppFilter) => void
+  filters?: CompoundFilter
+  defaultFilters?: CompoundFilter
+  onFiltersChange?: (filters: CompoundFilter) => void
   defaultMaxNestingDepth?: number
   onMaxNestingDepthChange?: (depth: number) => void
 } = {}) {
@@ -31,7 +31,7 @@ export function useFilterState({
     defaultMaxNestingDepth
   )
   // Draft filters - what the user is editing in the UI
-  const [draftFilters, setDraftFilters] = useControllableState<AppFilter>({
+  const [draftFilters, setDraftFilters] = useControllableState<CompoundFilter>({
     prop: filtersProp,
     defaultProp: defaultFilters,
     onChange: onFiltersChangeProp,
@@ -39,39 +39,39 @@ export function useFilterState({
 
   // Applied filters - what's actually used for queries
   const [appliedFilters, setAppliedFilters] =
-    useState<AppFilter>(defaultFilters)
+    useState<CompoundFilter>(defaultFilters)
 
   // Apply draft filters to applied filters
   const handleApplyFilters = useCallback(() => {
     setAppliedFilters(draftFilters)
   }, [draftFilters])
 
-  // Add a new filter condition
+  // Add a new filter rule
   const handleAddFilter = useCallback(
-    (condition: FilterCondition) => {
+    (rule: FilterRule) => {
       setDraftFilters((prev) => {
         if (!prev) {
-          return condition
+          return rule
         }
 
-        // If current filter is a condition, wrap both in an "and" group
-        if (prev.type === "property" || prev.type === "timestamp") {
+        // If current filter is a rule, wrap both in an "and" group
+        if (prev.type === "property") {
           return {
             type: "group",
             operator: "and",
-            conditions: [prev, condition],
+            nodes: [prev, rule],
           }
         }
 
-        // If current filter is a group, add condition to it
+        // If current filter is a group, add rule to it
         if (prev.type === "group") {
           return {
             ...prev,
-            conditions: [...prev.conditions, condition],
+            nodes: [...prev.nodes, rule],
           }
         }
 
-        return condition
+        return rule
       })
     },
     [setDraftFilters]
@@ -109,7 +109,7 @@ export function useFilterState({
   const handleAddGroup = useCallback(
     (operator: FilterGroupOperator = "and") => {
       setDraftFilters((prev) => {
-        const emptyCondition: FilterCondition = {
+        const emptyRule: FilterRule = {
           type: "property",
           property: "",
           propertyType: "",
@@ -120,19 +120,19 @@ export function useFilterState({
         const newGroup: FilterGroup = {
           type: "group",
           operator,
-          conditions: [emptyCondition],
+          nodes: [emptyRule],
         }
 
         if (!prev) {
           return newGroup
         }
 
-        // If current filter is a condition, wrap both in a group
-        if (prev.type === "property" || prev.type === "timestamp") {
+        // If current filter is a rule, wrap both in a group
+        if (prev.type === "property") {
           return {
             type: "group",
             operator,
-            conditions: [prev, newGroup],
+            nodes: [prev, newGroup],
           }
         }
 
@@ -140,7 +140,7 @@ export function useFilterState({
         if (prev.type === "group") {
           return {
             ...prev,
-            conditions: [...prev.conditions, newGroup],
+            nodes: [...prev.nodes, newGroup],
           }
         }
 
@@ -152,13 +152,13 @@ export function useFilterState({
 
   // Add filter to a specific group
   const handleAddFilterToGroup = useCallback(
-    (path: number[], condition: FilterCondition) => {
+    (path: number[], rule: FilterRule) => {
       setDraftFilters((prev) => {
         if (!prev) {
-          return condition
+          return rule
         }
 
-        return addFilterToGroup(prev, path, condition)
+        return addFilterToGroup(prev, path, rule)
       })
     },
     [setDraftFilters]
@@ -174,7 +174,7 @@ export function useFilterState({
           return prev
         }
 
-        const emptyCondition: FilterCondition = {
+        const emptyRule: FilterRule = {
           type: "property",
           property: "",
           propertyType: "",
@@ -186,14 +186,14 @@ export function useFilterState({
           return {
             type: "group",
             operator,
-            conditions: [emptyCondition],
+            nodes: [emptyRule],
           }
         }
 
         const newGroup: FilterGroup = {
           type: "group",
           operator,
-          conditions: [emptyCondition],
+          nodes: [emptyRule],
         }
 
         return addFilterToGroup(prev, path, newGroup)
@@ -202,9 +202,9 @@ export function useFilterState({
     [setDraftFilters, maxNestingDepth]
   )
 
-  // Update filter condition
+  // Update filter rule
   const handleUpdateFilter = useCallback(
-    (path: number[], updates: Partial<FilterCondition>) => {
+    (path: number[], updates: Partial<FilterRule>) => {
       setDraftFilters((prev) => {
         if (!prev) {
           return undefined
@@ -216,7 +216,7 @@ export function useFilterState({
     [setDraftFilters]
   )
 
-  // Duplicate filter item (condition or group) at path
+  // Duplicate filter node (rule or group) at path
   const handleDuplicateFilter = useCallback(
     (path: number[]) => {
       setDraftFilters((prev) => {
@@ -291,25 +291,26 @@ export function useFilterState({
 
 // Helper functions for filter manipulation
 
-function removeFilterByPath(filter: FilterItem, path: number[]): AppFilter {
+function removeFilterByPath(
+  filter: FilterNode,
+  path: number[]
+): CompoundFilter {
   if (path.length === 0) {
     return undefined
   }
 
   if (path.length === 1) {
     if (filter.type === "group") {
-      const newConditions = filter.conditions.filter(
-        (_, index) => index !== path[0]
-      )
-      if (newConditions.length === 0) {
+      const newNodes = filter.nodes.filter((_, index) => index !== path[0])
+      if (newNodes.length === 0) {
         return undefined
       }
-      if (newConditions.length === 1) {
-        return newConditions[0]
+      if (newNodes.length === 1) {
+        return newNodes[0]
       }
       return {
         ...filter,
-        conditions: newConditions,
+        nodes: newNodes,
       }
     }
     return undefined
@@ -317,36 +318,36 @@ function removeFilterByPath(filter: FilterItem, path: number[]): AppFilter {
 
   if (filter.type === "group") {
     const [firstIndex, ...restPath] = path
-    const condition = filter.conditions[firstIndex]
-    if (!condition) {
+    const childNode = filter.nodes[firstIndex]
+    if (!childNode) {
       return filter
     }
 
-    const updatedCondition = removeFilterByPath(condition, restPath)
-    const newConditions = [...filter.conditions]
-    if (updatedCondition === undefined) {
-      newConditions.splice(firstIndex, 1)
+    const updatedNode = removeFilterByPath(childNode, restPath)
+    const newNodes = [...filter.nodes]
+    if (updatedNode === undefined) {
+      newNodes.splice(firstIndex, 1)
     } else {
-      newConditions[firstIndex] = updatedCondition
+      newNodes[firstIndex] = updatedNode
     }
 
-    if (newConditions.length === 0) {
+    if (newNodes.length === 0) {
       return undefined
     }
-    if (newConditions.length === 1) {
-      return newConditions[0]
+    if (newNodes.length === 1) {
+      return newNodes[0]
     }
 
     return {
       ...filter,
-      conditions: newConditions,
+      nodes: newNodes,
     }
   }
 
   return filter
 }
 
-function toggleGroupOperator(filter: FilterItem, path: number[]): FilterItem {
+function toggleGroupOperator(filter: FilterNode, path: number[]): FilterNode {
   if (path.length === 0) {
     if (filter.type === "group") {
       return {
@@ -359,18 +360,18 @@ function toggleGroupOperator(filter: FilterItem, path: number[]): FilterItem {
 
   if (filter.type === "group") {
     const [firstIndex, ...restPath] = path
-    const condition = filter.conditions[firstIndex]
-    if (!condition) {
+    const childNode = filter.nodes[firstIndex]
+    if (!childNode) {
       return filter
     }
 
-    const updatedCondition = toggleGroupOperator(condition, restPath)
-    const newConditions = [...filter.conditions]
-    newConditions[firstIndex] = updatedCondition
+    const updatedNode = toggleGroupOperator(childNode, restPath)
+    const newNodes = [...filter.nodes]
+    newNodes[firstIndex] = updatedNode
 
     return {
       ...filter,
-      conditions: newConditions,
+      nodes: newNodes,
     }
   }
 
@@ -378,15 +379,15 @@ function toggleGroupOperator(filter: FilterItem, path: number[]): FilterItem {
 }
 
 function addFilterToGroup(
-  filter: FilterItem,
+  filter: FilterNode,
   path: number[],
-  item: FilterItem
-): FilterItem {
+  node: FilterNode
+): FilterNode {
   if (path.length === 0) {
     if (filter.type === "group") {
       return {
         ...filter,
-        conditions: [...filter.conditions, item],
+        nodes: [...filter.nodes, node],
       }
     }
     return filter
@@ -394,18 +395,18 @@ function addFilterToGroup(
 
   if (filter.type === "group") {
     const [firstIndex, ...restPath] = path
-    const groupCondition = filter.conditions[firstIndex]
-    if (!groupCondition || groupCondition.type !== "group") {
+    const groupNode = filter.nodes[firstIndex]
+    if (!groupNode || groupNode.type !== "group") {
       return filter
     }
 
-    const updatedCondition = addFilterToGroup(groupCondition, restPath, item)
-    const newConditions = [...filter.conditions]
-    newConditions[firstIndex] = updatedCondition
+    const updatedNode = addFilterToGroup(groupNode, restPath, node)
+    const newNodes = [...filter.nodes]
+    newNodes[firstIndex] = updatedNode
 
     return {
       ...filter,
-      conditions: newConditions,
+      nodes: newNodes,
     }
   }
 
@@ -413,41 +414,41 @@ function addFilterToGroup(
 }
 
 function updateFilterByPath(
-  filter: FilterItem,
+  filter: FilterNode,
   path: number[],
-  updates: Partial<FilterCondition>
-): FilterItem {
+  updates: Partial<FilterRule>
+): FilterNode {
   if (path.length === 0) {
-    if (filter.type === "property" || filter.type === "timestamp") {
+    if (filter.type === "property") {
       return {
         ...filter,
         ...updates,
-      } as FilterCondition
+      } as FilterRule
     }
     return filter
   }
 
   if (filter.type === "group") {
     const [firstIndex, ...restPath] = path
-    const condition = filter.conditions[firstIndex]
-    if (!condition) {
+    const childNode = filter.nodes[firstIndex]
+    if (!childNode) {
       return filter
     }
 
-    const updatedCondition = updateFilterByPath(condition, restPath, updates)
-    const newConditions = [...filter.conditions]
-    newConditions[firstIndex] = updatedCondition
+    const updatedNode = updateFilterByPath(childNode, restPath, updates)
+    const newNodes = [...filter.nodes]
+    newNodes[firstIndex] = updatedNode
 
     return {
       ...filter,
-      conditions: newConditions,
+      nodes: newNodes,
     }
   }
 
   return filter
 }
 
-function duplicateFilterByPath(filter: FilterItem, path: number[]): FilterItem {
+function duplicateFilterByPath(filter: FilterNode, path: number[]): FilterNode {
   if (path.length === 0) {
     // Duplicate the root filter
     return JSON.parse(JSON.stringify(filter))
@@ -458,34 +459,34 @@ function duplicateFilterByPath(filter: FilterItem, path: number[]): FilterItem {
 
     if (restPath.length === 0) {
       // Duplicate a direct child of this group
-      const itemToDuplicate = filter.conditions[firstIndex]
-      if (!itemToDuplicate) {
+      const nodeToDuplicate = filter.nodes[firstIndex]
+      if (!nodeToDuplicate) {
         return filter
       }
 
-      const duplicated = JSON.parse(JSON.stringify(itemToDuplicate))
-      const newConditions = [...filter.conditions]
-      newConditions.splice(firstIndex + 1, 0, duplicated)
+      const duplicated = JSON.parse(JSON.stringify(nodeToDuplicate))
+      const newNodes = [...filter.nodes]
+      newNodes.splice(firstIndex + 1, 0, duplicated)
 
       return {
         ...filter,
-        conditions: newConditions,
+        nodes: newNodes,
       }
     }
 
     // Recursively duplicate in nested group
-    const condition = filter.conditions[firstIndex]
-    if (!condition) {
+    const childNode = filter.nodes[firstIndex]
+    if (!childNode) {
       return filter
     }
 
-    const updatedCondition = duplicateFilterByPath(condition, restPath)
-    const newConditions = [...filter.conditions]
-    newConditions[firstIndex] = updatedCondition
+    const updatedNode = duplicateFilterByPath(childNode, restPath)
+    const newNodes = [...filter.nodes]
+    newNodes[firstIndex] = updatedNode
 
     return {
       ...filter,
-      conditions: newConditions,
+      nodes: newNodes,
     }
   }
 
