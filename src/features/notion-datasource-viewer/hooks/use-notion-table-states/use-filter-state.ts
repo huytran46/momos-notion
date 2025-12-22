@@ -10,6 +10,7 @@ import type {
 import {
   calculateNestingDepth,
   canAddNestedGroup,
+  canAddNestedGroupAtPath,
   validateFilterStructure,
 } from "@/utils/notion-filter-utils"
 
@@ -166,6 +167,12 @@ export function useFilterState({
   const handleAddGroupToPath = useCallback(
     (path: number[], operator: FilterGroupOperator = "and") => {
       setDraftFilters((prev) => {
+        // Check if adding a group at this path would exceed max nesting depth
+        if (!canAddNestedGroupAtPath(prev, path, maxNestingDepth)) {
+          // Cannot add group - max depth would be exceeded
+          return prev
+        }
+
         const emptyCondition: FilterCondition = {
           type: "property",
           property: "",
@@ -191,21 +198,7 @@ export function useFilterState({
         return addFilterToGroup(prev, path, newGroup)
       })
     },
-    [setDraftFilters]
-  )
-
-  // Convert condition to group
-  const handleConvertToGroup = useCallback(
-    (path: number[], operator: FilterGroupOperator = "and") => {
-      setDraftFilters((prev) => {
-        if (!prev) {
-          return undefined
-        }
-
-        return convertConditionToGroup(prev, path, operator)
-      })
-    },
-    [setDraftFilters]
+    [setDraftFilters, maxNestingDepth]
   )
 
   // Update filter condition
@@ -272,10 +265,12 @@ export function useFilterState({
 
   const handleMaxNestingDepthChange = useCallback(
     (depth: number) => {
-      setMaxNestingDepth(depth)
-      onMaxNestingDepthChangeProp?.(depth)
+      // Prevent reducing max depth below current depth
+      const effectiveDepth = Math.max(depth, currentNestingDepth)
+      setMaxNestingDepth(effectiveDepth)
+      onMaxNestingDepthChangeProp?.(effectiveDepth)
     },
-    [onMaxNestingDepthChangeProp]
+    [onMaxNestingDepthChangeProp, currentNestingDepth]
   )
 
   return {
@@ -292,7 +287,6 @@ export function useFilterState({
     handleAddGroup,
     handleAddFilterToGroup,
     handleAddGroupToPath,
-    handleConvertToGroup,
     handleUpdateFilter,
     handleDuplicateFilter,
     handleApplyFilters,
@@ -412,46 +406,6 @@ function addFilterToGroup(
     }
 
     const updatedCondition = addFilterToGroup(groupCondition, restPath, item)
-    const newConditions = [...filter.conditions]
-    newConditions[firstIndex] = updatedCondition
-
-    return {
-      ...filter,
-      conditions: newConditions,
-    }
-  }
-
-  return filter
-}
-
-function convertConditionToGroup(
-  filter: FilterItem,
-  path: number[],
-  operator: FilterGroupOperator
-): FilterItem {
-  if (path.length === 0) {
-    if (filter.type === "property" || filter.type === "timestamp") {
-      return {
-        type: "group",
-        operator,
-        conditions: [filter],
-      }
-    }
-    return filter
-  }
-
-  if (filter.type === "group") {
-    const [firstIndex, ...restPath] = path
-    const condition = filter.conditions[firstIndex]
-    if (!condition) {
-      return filter
-    }
-
-    const updatedCondition = convertConditionToGroup(
-      condition,
-      restPath,
-      operator
-    )
     const newConditions = [...filter.conditions]
     newConditions[firstIndex] = updatedCondition
 

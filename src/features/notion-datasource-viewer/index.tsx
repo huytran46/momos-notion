@@ -115,7 +115,6 @@ export function NotionDatasourceViewer({
             onAddGroup={filters.handleAddGroup}
             onAddFilterToGroup={filters.handleAddFilterToGroup}
             onAddGroupToPath={filters.handleAddGroupToPath}
-            onConvertToGroup={filters.handleConvertToGroup}
             onUpdateFilter={filters.handleUpdateFilter}
             onDuplicateFilter={filters.handleDuplicateFilter}
             onApplyFilters={filters.handleApplyFilters}

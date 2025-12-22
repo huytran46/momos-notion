@@ -26,10 +26,9 @@ type NotionFilterConditionProps = {
   columnDefs: ColumnDef<Record<string, unknown>>[]
   onUpdate: (updates: Partial<FilterCondition>) => void
   onRemove: () => void
-  onConvertToGroup: () => void
-  canConvertToGroup: boolean
-  nestingLevel?: number
-  maxNestingDepth?: number
+  onDuplicate: () => void
+  // nestingLevel?: number
+  // maxNestingDepth?: number
   indexInGroup?: number
   groupOperator?: "and" | "or"
   onOperatorChange?: (operator: "and" | "or") => void
@@ -40,10 +39,9 @@ export function NotionFilterCondition({
   columnDefs,
   onUpdate,
   onRemove,
-  onConvertToGroup,
-  canConvertToGroup,
-  nestingLevel: _nestingLevel = 0,
-  maxNestingDepth: _maxNestingDepth = 2,
+  onDuplicate,
+  // nestingLevel = 0,
+  // maxNestingDepth = 2,
   indexInGroup = 0,
   groupOperator = "and",
   onOperatorChange,
@@ -286,11 +284,13 @@ export function NotionFilterCondition({
           }}
         >
           <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0">
-            <Select.Value />
-            <Select.Icon className="text-hn-text-secondary">▼</Select.Icon>
+            <Select.Value className="flex-1 min-w-0" />
+            <Select.Icon className="text-hn-text-secondary shrink-0">
+              ▼
+            </Select.Icon>
           </Select.Trigger>
           <Select.Portal>
-            <Select.Content className="bg-white border border-hn-border shadow-none z-50">
+            <Select.Content className="bg-white border border-hn-border shadow-none">
               <Select.ScrollUpButton className="hidden" />
               <Select.Viewport className="p-1">
                 <Select.Item
@@ -329,15 +329,17 @@ export function NotionFilterCondition({
         {isIncomplete ? (
           // Incomplete state: show combined property/timestamp selector
           <Select.Root value="" onValueChange={handlePropertyOrTimestampChange}>
-            <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0">
+            <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between">
               <Select.Value
                 placeholder="Select property or timestamp"
-                className="data-placeholder:text-hn-text-secondary"
+                className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
               />
-              <Select.Icon className="text-hn-text-secondary">▼</Select.Icon>
+              <Select.Icon className="text-hn-text-secondary shrink-0 ml-auto">
+                ▼
+              </Select.Icon>
             </Select.Trigger>
             <Select.Portal>
-              <Select.Content className="bg-white border border-hn-border shadow-none z-50">
+              <Select.Content className="bg-white border border-hn-border shadow-none">
                 <Select.ScrollUpButton className="hidden" />
                 <Select.Viewport className="p-1">
                   <Select.Group>
@@ -384,15 +386,17 @@ export function NotionFilterCondition({
             value={condition.property}
             onValueChange={handlePropertyOrTimestampChange}
           >
-            <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0">
+            <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between">
               <Select.Value
                 placeholder="Select property"
-                className="data-placeholder:text-hn-text-secondary"
+                className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
               />
-              <Select.Icon className="text-hn-text-secondary">▼</Select.Icon>
+              <Select.Icon className="text-hn-text-secondary shrink-0">
+                ▼
+              </Select.Icon>
             </Select.Trigger>
             <Select.Portal>
-              <Select.Content className="bg-white border border-hn-border shadow-none z-50">
+              <Select.Content className="bg-white border border-hn-border shadow-none">
                 <Select.ScrollUpButton className="hidden" />
                 <Select.Viewport className="p-1">
                   {availableColumns
@@ -417,15 +421,17 @@ export function NotionFilterCondition({
             value={condition.timestamp}
             onValueChange={handlePropertyOrTimestampChange}
           >
-            <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0">
+            <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between">
               <Select.Value
                 placeholder="Select timestamp"
-                className="data-placeholder:text-hn-text-secondary"
+                className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
               />
-              <Select.Icon className="text-hn-text-secondary">▼</Select.Icon>
+              <Select.Icon className="text-hn-text-secondary shrink-0">
+                ▼
+              </Select.Icon>
             </Select.Trigger>
             <Select.Portal>
-              <Select.Content className="bg-white border border-hn-border shadow-none z-50">
+              <Select.Content className="bg-white border border-hn-border shadow-none">
                 <Select.ScrollUpButton className="hidden" />
                 <Select.Viewport className="p-1">
                   <Select.Item
@@ -453,15 +459,17 @@ export function NotionFilterCondition({
               value={condition.operator}
               onValueChange={handleOperatorChange}
             >
-              <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0">
+              <Select.Trigger className="px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left inline-flex items-center justify-between">
                 <Select.Value
                   placeholder="Select operator"
-                  className="data-placeholder:text-hn-text-secondary"
+                  className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
                 />
-                <Select.Icon className="text-hn-text-secondary">▼</Select.Icon>
+                <Select.Icon className="text-hn-text-secondary shrink-0">
+                  ▼
+                </Select.Icon>
               </Select.Trigger>
               <Select.Portal>
-                <Select.Content className="bg-white border border-hn-border shadow-none z-50">
+                <Select.Content className="bg-white border border-hn-border shadow-none">
                   <Select.ScrollUpButton className="hidden" />
                   <Select.Viewport className="p-1">
                     {availableOperators.map((operator) => (
@@ -490,7 +498,7 @@ export function NotionFilterCondition({
             <Popover.Trigger asChild>
               <button
                 type="button"
-                className="px-2 py-1 text-xs border border-hn-border bg-white hover:bg-hn-hover text-hn-text"
+                className="px-2 py-1 text-xs bg-white hover:bg-hn-hover text-hn-text"
                 aria-label="More options"
               >
                 ⋯
@@ -499,21 +507,19 @@ export function NotionFilterCondition({
             <Popover.Portal>
               <Popover.Content
                 align="end"
-                className="w-40 p-1 bg-white border border-hn-border shadow-none z-50"
+                className="w-40 p-1 bg-white border border-hn-border shadow-none"
               >
                 <div className="space-y-1">
-                  {canConvertToGroup && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        onConvertToGroup()
-                        setMenuOpen(false)
-                      }}
-                      className="w-full px-2 py-1 text-sm text-left hover:bg-hn-hover text-hn-text"
-                    >
-                      Convert to group
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onDuplicate()
+                      setMenuOpen(false)
+                    }}
+                    className="w-full px-2 py-1 text-sm text-left hover:bg-hn-hover text-hn-text"
+                  >
+                    Duplicate
+                  </button>
                   <button
                     type="button"
                     onClick={() => {
