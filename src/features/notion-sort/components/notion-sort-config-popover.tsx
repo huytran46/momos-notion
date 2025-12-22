@@ -16,10 +16,10 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import * as Popover from "@radix-ui/react-popover"
-import * as Select from "@radix-ui/react-select"
 import type { ColumnDef } from "@tanstack/react-table"
 import { useMemo, useState } from "react"
+import { Popover } from "@/components/ui/popover"
+import { Select } from "@/components/ui/select"
 import type { NotionSort } from "@/features/notion-sort/types/notion-sort"
 
 type SortConfigPanelProps = {
@@ -206,21 +206,23 @@ export function NotionSortConfigPopover({
     onResetSorts()
   }
 
+  const hasSorts = sorts.length > 0
+
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <button
           type="button"
-          className="px-3 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text"
+          className="relative px-3 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text"
         >
           Sort
+          {hasSorts && (
+            <span className="absolute -top-1 -right-1 size-2 rounded-full bg-hn-orange" />
+          )}
         </button>
       </Popover.Trigger>
       <Popover.Portal>
-        <Popover.Content
-          align="start"
-          className="w-80 p-3 bg-white border border-hn-border shadow-none"
-        >
+        <Popover.Content align="start" className="w-80 p-3">
           <div className="space-y-3">
             <div className="text-sm font-semibold text-hn-text">Sort</div>
 
@@ -264,19 +266,17 @@ export function NotionSortConfigPopover({
                     value={selectedColumn}
                     onValueChange={handleColumnSelect}
                   >
-                    <Select.Trigger className="flex-1 px-2 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text text-left flex items-center justify-between min-w-0">
+                    <Select.Trigger className="flex-1 flex items-center justify-between min-w-0">
                       <Select.Value
                         placeholder="Select column"
                         className="data-placeholder:text-hn-text-secondary"
                       />
-                      <Select.Icon className="text-hn-text-secondary">
-                        ▼
-                      </Select.Icon>
+                      <Select.Icon />
                     </Select.Trigger>
                     <Select.Portal>
-                      <Select.Content className="bg-white border border-hn-border shadow-none z-50">
-                        <Select.ScrollUpButton className="hidden" />
-                        <Select.Viewport className="p-1">
+                      <Select.Content className="z-50">
+                        <Select.ScrollUpButton />
+                        <Select.Viewport>
                           {unsortedColumns.map((column) => (
                             <Select.Item
                               key={column.id}
@@ -287,7 +287,7 @@ export function NotionSortConfigPopover({
                             </Select.Item>
                           ))}
                         </Select.Viewport>
-                        <Select.ScrollDownButton className="hidden" />
+                        <Select.ScrollDownButton />
                       </Select.Content>
                     </Select.Portal>
                   </Select.Root>
@@ -303,7 +303,7 @@ export function NotionSortConfigPopover({
               </div>
             )}
           </div>
-          <Popover.Arrow className="fill-white" />
+          <Popover.Arrow />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
