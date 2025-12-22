@@ -5,12 +5,12 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
-import type { AppFilter } from "@/features/notion-datasource-viewer/types/notion-filters"
-import { notionPageResultsToRowData } from "@/utils/notion-data-parser"
+import type { AppFilter } from "@/features/notion-filters/types/notion-filters"
 import {
   convertToNotionApiFormat,
   validateNotionFilter,
-} from "@/utils/notion-filter-utils"
+} from "@/features/notion-filters/utils/notion-filter-utils"
+import { notionPageResultsToRowData } from "@/utils/notion-data-parser"
 
 type NotionSort =
   | {
