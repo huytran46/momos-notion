@@ -398,6 +398,15 @@ function duplicateFilterInternal(
   path: number[]
 ): FilterNode {
   if (path.length === 0) {
+    if (filter.type === "property") {
+      const duplicated = JSON.parse(JSON.stringify(filter))
+      const grouped = {
+        type: "group" as const,
+        operator: "and" as const,
+        nodes: [filter, duplicated],
+      }
+      return grouped
+    }
     return JSON.parse(JSON.stringify(filter))
   }
 

@@ -851,13 +851,17 @@ describe("compound-filter", () => {
     })
 
     describe("duplicateFilter", () => {
-      it("should duplicate rule at root", () => {
+      it("should duplicate single root rule by grouping and adding a copy", () => {
         const rule = createTestFilterRule({ property: "A" })
         const duplicated = NotionFilters.duplicateFilter(rule, [])
+
         expect(duplicated).toBeDefined()
-        if (duplicated) {
-          expect(duplicated).toEqual(rule)
-          expect(duplicated).not.toBe(rule) // Different reference
+        expect(duplicated?.type).toBe("group")
+        if (duplicated?.type === "group") {
+          expect(duplicated.nodes).toHaveLength(2)
+          expect(duplicated.nodes[0]).toEqual(rule)
+          expect(duplicated.nodes[1]).toEqual(rule)
+          expect(duplicated.nodes[0]).not.toBe(duplicated.nodes[1]) // new reference
         }
       })
 

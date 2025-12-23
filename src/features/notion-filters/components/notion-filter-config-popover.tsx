@@ -201,8 +201,8 @@ export function NotionFilterConfigPopover({
           onRemoveFilter={onRemoveFilter}
           onUpdateFilter={onUpdateFilter}
           onRemoveGroup={onRemoveFilter}
-          onDuplicateGroup={onDuplicateFilter}
-          onDuplicateFilter={onDuplicateFilter}
+          onDuplicateGroup={(targetPath) => onDuplicateFilter(targetPath)}
+          onDuplicateFilter={(targetPath) => onDuplicateFilter(targetPath)}
           onAddGroupToPath={onAddGroupToPath}
         />
       )
@@ -295,7 +295,7 @@ export function NotionFilterConfigPopover({
                   type="button"
                   onClick={onResetFilters}
                   disabled={!filters}
-                  className="ml-auto px-3 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="ml-auto px-3 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover disabled:hover:bg-white text-hn-text disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Reset
                 </button>
