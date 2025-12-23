@@ -1,0 +1,8456 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`convertToNotionApiFormat > should flatten real-world e-commerce product filter with 6-level nesting 1`] = `
+{
+  "or": [
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "multi_select": {
+            "contains": "Electronics",
+          },
+          "property": "Category",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 500,
+          },
+          "property": "Price",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Has Discount",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Available for Shipping",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "greater_than_or_equal_to": 4,
+          },
+          "property": "Customer Rating",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "In Stock",
+        },
+      ],
+    },
+    {
+      "and": [
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Active",
+        },
+        {
+          "checkbox": {
+            "equals": true,
+          },
+          "property": "Featured",
+        },
+        {
+          "number": {
+            "less_than": 50,
+          },
+          "property": "Stock Quantity",
+        },
+      ],
+    },
+  ],
+}
+`;
