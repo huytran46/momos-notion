@@ -3,7 +3,7 @@
  * TODO: Add tests for filter creation, operations, queries, and UI helpers
  */
 
-import { describe } from "vitest"
+import { describe, it } from "vitest"
 
 describe("compound-filter", () => {
   // Placeholder for future tests
