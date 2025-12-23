@@ -20,12 +20,19 @@ function getApiUrl(path: string): string {
   return path
 }
 
-export function notionDatasourceColumnDefOpts(datasourceId: string) {
+export function notionDatasourceColumnDefOpts(
+  datasourceId: string,
+  notionKey: string
+) {
   return queryOptions({
     queryKey: ["notion-datasource-column-defs", datasourceId],
     queryFn: async () => {
       const url = getApiUrl(`/api/notion/datasources/${datasourceId}`)
-      const response = await fetch(url)
+      const response = await fetch(url, {
+        headers: {
+          "x-notion-key": notionKey,
+        },
+      })
 
       if (!response.ok) {
         const error = await response.json()
@@ -39,12 +46,13 @@ export function notionDatasourceColumnDefOpts(datasourceId: string) {
         columnDefs: ColumnDef<Record<string, unknown>>[]
       }
     },
-    enabled: !!datasourceId,
+    enabled: !!datasourceId && !!notionKey,
   })
 }
 
 export function notionDatasourceDataInfiniteOpts(
   datasourceId: string,
+  notionKey: string,
   params?: Omit<NotionDatasourceQueryParams, "cursor">
 ) {
   return infiniteQueryOptions({
@@ -67,7 +75,11 @@ export function notionDatasourceDataInfiniteOpts(
       const queryString = searchParams.toString()
       const path = `/api/notion/datasources/${datasourceId}/data${queryString ? `?${queryString}` : ""}`
       const url = getApiUrl(path)
-      const response = await fetch(url)
+      const response = await fetch(url, {
+        headers: {
+          "x-notion-key": notionKey,
+        },
+      })
 
       if (!response.ok) {
         const error = await response.json()
@@ -82,7 +94,7 @@ export function notionDatasourceDataInfiniteOpts(
     },
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.next_cursor ?? undefined,
-    enabled: !!datasourceId,
+    enabled: !!datasourceId && !!notionKey,
     retry: 1,
   })
 }

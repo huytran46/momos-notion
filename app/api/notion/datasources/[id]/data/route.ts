@@ -24,12 +24,12 @@ type NotionSort =
 
 export async function GET(request: NextRequest) {
   try {
-    // Check for NOTION_KEY environment variable
-    const notionKey = process.env.NOTION_KEY
+    const requestNotionKey = request.headers.get("x-notion-key") || undefined
+    const notionKey = requestNotionKey || process.env.NOTION_KEY
     if (!notionKey) {
       return NextResponse.json(
-        { error: "NOTION_KEY environment variable is not set" },
-        { status: 500 }
+        { error: "Notion key is required" },
+        { status: 400 }
       )
     }
 

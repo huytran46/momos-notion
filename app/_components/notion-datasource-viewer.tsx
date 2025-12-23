@@ -14,17 +14,21 @@ import { NotionDatasourceForm } from "./notion-datasource-form"
 
 export function NotionDatasourceViewer({
   defaultDatasourceId = "",
+  defaultNotionKey = "",
 }: {
   defaultDatasourceId?: string
+  defaultNotionKey?: string
 }) {
   const [datasourceId, setDatasourceId] = useState(defaultDatasourceId)
+  const [notionKey, setNotionKey] = useState(defaultNotionKey)
+  const [showKeyCallout, setShowKeyCallout] = useState(true)
 
   // Fetch schema
   const {
     data: schemaData,
     error: schemaError,
     isLoading: isSchemaLoading,
-  } = useSuspenseQuery(notionDatasourceColumnDefOpts(datasourceId))
+  } = useSuspenseQuery(notionDatasourceColumnDefOpts(datasourceId, notionKey))
 
   const columnDefs = schemaData.columnDefs
   const columnIds = useMemo(() => {
@@ -51,7 +55,7 @@ export function NotionDatasourceViewer({
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery(
-    notionDatasourceDataInfiniteOpts(datasourceId, {
+    notionDatasourceDataInfiniteOpts(datasourceId, notionKey, {
       sorts: sorts.state,
       filter: filters.appliedState,
     })
@@ -70,7 +74,9 @@ export function NotionDatasourceViewer({
     event.preventDefault()
     const formData = new FormData(event.target as HTMLFormElement)
     const newId = formData.get("datasourceId") as string
+    const newKey = (formData.get("notionKey") as string) ?? ""
     setDatasourceId(newId)
+    setNotionKey(newKey)
     // Reset feature states when datasource changes
     sorts.handleSortReset()
     filters.handleResetFilters()
@@ -84,11 +90,31 @@ export function NotionDatasourceViewer({
 
   return (
     <>
+      {showKeyCallout && (
+        <div className="mb-3 flex items-start gap-3 rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+          <div className="flex-1">
+            For demo purposes, the Notion key is entered manually here. In a
+            real app it should be kept secret and never exposed in the client.
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowKeyCallout(false)}
+            className="text-xs text-amber-900 underline whitespace-nowrap"
+            aria-label="Dismiss demo callout"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
+
       {/* Datasource Selection */}
       <NotionDatasourceForm
         defaultDatasourceId={datasourceId}
+        defaultNotionKey={notionKey}
         onSubmit={handleSubmit}
       />
+
+      <hr className="my-4 border-hn-border" />
 
       {!isSchemaLoading && columnDefs.length > 0 && (
         <div className="mb-4 flex gap-2">
@@ -126,7 +152,9 @@ export function NotionDatasourceViewer({
 
       {/* Error Messages */}
       {error && (
-        <div className="mb-4 text-red-600 text-sm">Something went wrong</div>
+        <div className="mb-4 text-red-600 text-sm">
+          {error instanceof Error ? error.message : "Something went wrong"}
+        </div>
       )}
 
       {/* Loading State */}
@@ -171,6 +199,7 @@ export function NotionDatasourceViewer({
       {/* Empty State */}
       {!isLoading &&
         datasourceId &&
+        notionKey &&
         !error &&
         columnDefs.length > 0 &&
         flatData.length === 0 && (
