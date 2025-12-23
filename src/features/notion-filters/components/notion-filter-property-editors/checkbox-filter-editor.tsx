@@ -20,7 +20,9 @@ export function CheckboxFilterEditor({
     <div className="flex items-center gap-2">
       <Checkbox.Root
         checked={checked}
-        onCheckedChange={(checked) => onChange(checked === true)}
+        onCheckedChange={(checked) => {
+          onChange(checked === true)
+        }}
         disabled={disabled}
         className="flex h-4 w-4 items-center justify-center border border-hn-border bg-white data-[state=checked]:bg-hn-orange data-[state=checked]:border-hn-orange"
       >

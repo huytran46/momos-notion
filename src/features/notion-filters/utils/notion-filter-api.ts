@@ -341,7 +341,16 @@ function convertPropertyFilter(
     "created_time" | "last_edited_time"
   >
 
-  const typeFilter = buildOperatorFilter(operator, value)
+  // Normalize checkbox values: Notion expects strict booleans for equals/does_not_equal
+  let normalizedValue: FilterValue = value
+  if (
+    validPropertyType === "checkbox" &&
+    (operator === "equals" || operator === "does_not_equal")
+  ) {
+    normalizedValue = value === true
+  }
+
+  const typeFilter = buildOperatorFilter(operator, normalizedValue)
 
   return {
     property,

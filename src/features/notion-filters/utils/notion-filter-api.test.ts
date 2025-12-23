@@ -247,4 +247,23 @@ describe("convertToNotionApiFormat", () => {
     // are converted to Notion's API format for querying product databases
     expect(result).toMatchSnapshot()
   })
+
+  it("normalizes checkbox equals from null to false", () => {
+    const filter: CompoundFilter = {
+      type: "property",
+      property: "Sold out",
+      propertyType: "checkbox",
+      operator: "equals",
+      value: null,
+    }
+
+    const result = convertToNotionApiFormat(filter)
+
+    expect(result).toEqual({
+      property: "Sold out",
+      checkbox: {
+        equals: false,
+      },
+    })
+  })
 })
