@@ -10,7 +10,7 @@ import type {
 import {
   formatOperatorLabel,
   getAvailableOperators,
-} from "@/features/notion-filters/utils/notion-filter-utils"
+} from "@/features/notion-filters/utils/compound-filter"
 import { CheckboxFilterEditor } from "./notion-filter-property-editors/checkbox-filter-editor"
 import { DateFilterEditor } from "./notion-filter-property-editors/date-filter-editor"
 import { MultiSelectFilterEditor } from "./notion-filter-property-editors/multi-select-filter-editor"
@@ -230,6 +230,7 @@ export function NotionFilterRule({
             />
           )
         case "rich_text":
+        case "title":
           return (
             <RichTextFilterEditor
               value={condition.value}

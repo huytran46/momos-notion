@@ -9,7 +9,7 @@ import type { CompoundFilter } from "@/features/notion-filters/types/notion-filt
 import {
   convertToNotionApiFormat,
   validateNotionFilter,
-} from "@/features/notion-filters/utils/notion-filter-utils"
+} from "@/features/notion-filters/utils/notion-filter-api"
 import { notionPageResultsToRowData } from "@/utils/notion-data-parser"
 
 type NotionSort =
@@ -111,10 +111,17 @@ export async function GET(request: NextRequest) {
     }
 
     try {
+      type NotionDatasourceQueryParams = Parameters<
+        typeof notion.dataSources.query
+      >[0]
+
       // Query datasource with optional parameters
       const queryResponse = await notion.dataSources.query({
         data_source_id: datasourceId,
         page_size: pageSize,
+        // start_cursor: cursor,
+        // filter: notionFilter as NotionDatasourceQueryParams["filter"],
+        // sorts: sorts as NotionDatasourceQueryParams["sorts"],
         ...(cursor && { start_cursor: cursor }),
         ...(notionFilter && {
           filter: notionFilter as Parameters<

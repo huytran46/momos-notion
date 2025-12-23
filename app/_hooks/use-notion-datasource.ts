@@ -83,5 +83,6 @@ export function notionDatasourceDataInfiniteOpts(
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.next_cursor ?? undefined,
     enabled: !!datasourceId,
+    retry: 1,
   })
 }
