@@ -11,6 +11,7 @@ export type FilterablePropertyType =
   | "multi_select"
   | "number"
   | "rich_text"
+  | "title"
   | "select"
   | "status"
   | "created_time"
