@@ -68,7 +68,10 @@ const SelectContent = React.forwardRef<
   ) => (
     <SelectPrimitive.Content
       ref={ref}
-      className={cn("bg-white border border-hn-border shadow-none", className)}
+      className={cn(
+        "bg-white border border-hn-border shadow-none max-h-[300px]",
+        className
+      )}
       position={position}
       collisionPadding={collisionPadding}
       {...props}
@@ -76,8 +79,8 @@ const SelectContent = React.forwardRef<
       <SelectScrollUpButton />
       <SelectPrimitive.Viewport
         className={cn(
-          "p-1",
-          position === "popper" && "min-w-[var(--radix-select-trigger-width)]"
+          "p-1 overflow-y-auto",
+          position === "popper" && "min-w-(--radix-select-trigger-width)"
         )}
       >
         {children}

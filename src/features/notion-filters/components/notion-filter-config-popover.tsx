@@ -16,21 +16,27 @@ type AddFilterDropdownProps = {
   onAddOne: () => void
   onAddGroup: () => void
   canAddGroup?: boolean
+  disableAddGroup?: boolean
+  borderColor?: string
 }
 
 function AddFilterDropdown({
   onAddOne,
   onAddGroup,
+  disableAddGroup = false,
   canAddGroup = true,
+  borderColor,
 }: AddFilterDropdownProps) {
   const [open, setOpen] = useState(false)
+  const buttonColor = borderColor || "#ff6600"
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <button
           type="button"
-          className="px-3 py-1 text-sm border border-hn-border bg-white hover:bg-hn-hover text-hn-text"
+          className="text-sm hover:opacity-90"
+          style={{ color: buttonColor }}
         >
           + Add a filter
         </button>
@@ -75,7 +81,7 @@ function AddFilterDropdown({
                   onAddGroup()
                   setOpen(false)
                 }}
-                disabled={!canAddGroup}
+                disabled={!canAddGroup || disableAddGroup}
                 className="w-full px-2 py-1 text-sm text-left hover:bg-hn-hover text-hn-text disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent"
               >
                 Add group
@@ -203,17 +209,25 @@ export function NotionFilterConfigPopover({
     }
 
     return (
-      <NotionFilterRule
-        key={path.join("-")}
-        condition={node}
-        columnDefs={columnDefs}
-        onUpdate={(updates) => onUpdateFilter(path, updates)}
-        onRemove={() => onRemoveFilter(path)}
-        onDuplicate={() => onDuplicateFilter(path)}
-        // nestingLevel={nestingLevel}
-        // maxNestingDepth={maxNestingDepth}
-        indexInGroup={0}
-      />
+      <div key={path.join("-")} className="space-y-2">
+        <NotionFilterRule
+          condition={node}
+          columnDefs={columnDefs}
+          onUpdate={(updates) => onUpdateFilter(path, updates)}
+          onRemove={() => onRemoveFilter(path)}
+          onDuplicate={() => onDuplicateFilter(path)}
+          // nestingLevel={nestingLevel}
+          // maxNestingDepth={maxNestingDepth}
+          indexInGroup={0}
+        />
+        <div>
+          <AddFilterDropdown
+            onAddOne={() => handleAddFilterClick(path)}
+            onAddGroup={() => handleAddGroupClick(path)}
+            borderColor="#ff6600" // Use orange color for root level
+          />
+        </div>
+      </div>
     )
   }
 
@@ -274,7 +288,7 @@ export function NotionFilterConfigPopover({
                 <AddFilterDropdown
                   onAddOne={handleAddFilterClick}
                   onAddGroup={handleAddGroupClick}
-                  canAddGroup // always enable adding a group at the root level
+                  disableAddGroup // disable adding a group at the root level
                 />
 
                 <button
