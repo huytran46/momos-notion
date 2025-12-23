@@ -285,6 +285,37 @@ export function NotionDatasourceViewer({
         onSubmit={handleSubmit}
       />
 
+      <div className="mt-2 text-xs text-hn-text-secondary">
+        Currently, we only support these property types:{" "}
+        <span className="ml-1 inline-flex flex-wrap gap-1">
+          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+            checkbox
+          </span>
+          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+            date
+          </span>
+          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+            multi_select
+          </span>
+          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+            number
+          </span>
+          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+            rich_text
+          </span>
+          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+            select
+          </span>
+          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+            timestamp
+          </span>
+          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+            status
+          </span>
+        </span>
+        .
+      </div>
+
       <hr className="my-4 border-hn-border" />
 
       <Suspense

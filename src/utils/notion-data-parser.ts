@@ -4,6 +4,7 @@ import type {
   PartialPageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints"
 import type { ColumnDef } from "@tanstack/react-table"
+import type { FilterablePropertyType } from "@/features/notion-filters/types/notion-filters"
 
 /**
  * Parses a checkbox property from Notion API page property
@@ -535,29 +536,46 @@ function notionPropertyToPrimitives(
  * @param properties - Data source properties from dataSources.retrieve()
  * @returns Array of column definitions for TanStack Table
  */
+const SUPPORTED_PROPERTY_TYPES: FilterablePropertyType[] = [
+  "checkbox",
+  "date",
+  "multi_select",
+  "number",
+  "rich_text",
+  "title",
+  "select",
+  "status",
+  "created_time",
+  "last_edited_time",
+]
+
 export function notionPropsToColumnDefs(
   properties: DataSourceObjectResponse["properties"]
 ): ColumnDef<Record<string, unknown>>[] {
-  return Object.entries(properties).map(([key, property]) => ({
-    id: key, // unique id for the column
-    accessorKey: key,
-    header: property.name,
-    meta: {
-      propertyType: property.type,
-      ...(property.type === "select" &&
-        "select" in property && {
-          selectOptions: property.select.options,
-        }),
-      ...(property.type === "multi_select" &&
-        "multi_select" in property && {
-          multiSelectOptions: property.multi_select.options,
-        }),
-      ...(property.type === "status" &&
-        "status" in property && {
-          statusOptions: property.status.options,
-        }),
-    },
-  }))
+  return Object.entries(properties)
+    .filter(([, property]) =>
+      SUPPORTED_PROPERTY_TYPES.includes(property.type as FilterablePropertyType)
+    )
+    .map(([key, property]) => ({
+      id: key, // unique id for the column
+      accessorKey: key,
+      header: property.name,
+      meta: {
+        propertyType: property.type,
+        ...(property.type === "select" &&
+          "select" in property && {
+            selectOptions: property.select.options,
+          }),
+        ...(property.type === "multi_select" &&
+          "multi_select" in property && {
+            multiSelectOptions: property.multi_select.options,
+          }),
+        ...(property.type === "status" &&
+          "status" in property && {
+            statusOptions: property.status.options,
+          }),
+      },
+    }))
 }
 
 /**
