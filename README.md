@@ -32,6 +32,21 @@ Then open `http://localhost:3000` in your browser.
 > The **right** side of `-p 3000:3000` (`3000`) is the internal app port and should stay `3000`.  
 > You can change the **left** side (`3000`) to any free port on your machine, for example `-p 4000:3000` to use `http://localhost:4000`.
 
+### Option 2 if Docker Hub is unavailable
+
+If pulling `tranqhuy46/momos-notion` fails (e.g., registry outage), you can build and run the image locally:
+
+1. Ensure Docker is installed and running.
+2. From the repo root, make sure the helper script is executable (one time):  
+   `chmod +x scripts/build-and-run-local.sh`
+3. Run the script:  
+   `./scripts/build-and-run-local.sh`
+
+The script will build a local image, remove any existing container with the same name, start the app, and print the URL (defaults to `http://localhost:3000`). Customize host port or names with env vars when running, for example:
+
+- `HOST_PORT=4000 ./scripts/build-and-run-local.sh` — serves at `http://localhost:4000`
+- `IMAGE_TAG=momos-notion:backup CONTAINER_NAME=momos-notion-backup ./scripts/build-and-run-local.sh`
+
 ## Prerequisite
 - node v22 (v22.21.1) (required for local development only)
 - pnpm v10.24.0
