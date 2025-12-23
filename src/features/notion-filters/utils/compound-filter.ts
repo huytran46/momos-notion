@@ -448,6 +448,62 @@ function duplicateFilterInternal(
 }
 
 // ============================================================================
+// GROUP NOT FLAG OPERATIONS
+// ============================================================================
+
+/**
+ * Toggles the `not` flag on a group at the specified path.
+ * If the path does not resolve to a group, returns the original filter.
+ */
+export function toggleGroupNot(
+  filter: CompoundFilter,
+  path: number[]
+): CompoundFilter {
+  if (!filter) {
+    return filter
+  }
+
+  if (filter.type !== "group") {
+    // Root is a single rule; cannot apply NOT at group level.
+    return filter
+  }
+
+  return toggleGroupNotInternal(filter, path)
+}
+
+function toggleGroupNotInternal(node: FilterNode, path: number[]): FilterNode {
+  if (path.length === 0) {
+    if (node.type === "group") {
+      const currentNot = node.not ?? false
+      return {
+        ...node,
+        not: !currentNot,
+      }
+    }
+    return node
+  }
+
+  if (node.type === "group") {
+    const [firstIndex, ...rest] = path
+    const child = node.nodes[firstIndex]
+    if (!child) {
+      return node
+    }
+
+    const updatedChild = toggleGroupNotInternal(child, rest)
+    const newNodes = [...node.nodes]
+    newNodes[firstIndex] = updatedChild
+
+    return {
+      ...node,
+      nodes: newNodes,
+    }
+  }
+
+  return node
+}
+
+// ============================================================================
 // FILTER QUERIES (Read-Only Computations)
 // ============================================================================
 

@@ -2,6 +2,8 @@
 
 Author: tranquochuy4698@gmail.com
 
+![Notion datasource viewer](./momos-notion-datasource-viewer.png)
+
 ## Run with Docker (recommended for interviewers)
 
 If you just want to run the app quickly without setting up Node and pnpm, you can use the public Docker image:
@@ -88,4 +90,6 @@ For interviews and quick demos, you can use the following Notion datasource:
 
 - **Demo Notion datasource**: [Momos Notion datasource](https://quartz-quill-96b.notion.site/2cfabd3091c580449aa0f87b6e632029?v=5b5263e95a0f45dfa9876060b7406e34&source=copy_link)
 
-This is the database the app is configured to work with out of the box for demonstration.
+
+
+This is the datasource the app is configured to work with out of the box for demonstration.

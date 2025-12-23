@@ -227,6 +227,7 @@ type NotionFilterGroupProps = {
   // indexInGroup?: number
   // groupOperator?: "and" | "or"
   onToggleOperator: (path: number[]) => void
+  onToggleNot: (path: number[]) => void
   onAddFilter: (path: number[], rule: FilterRule) => void
   onAddFilterClick: (path: number[]) => void
   onAddGroupClick: (path: number[]) => void
@@ -247,6 +248,7 @@ export function NotionFilterGroup({
   // indexInGroup = 0,
   // groupOperator: parentGroupOperator,
   onToggleOperator,
+  onToggleNot,
   onAddFilter,
   onAddFilterClick,
   onAddGroupClick,
@@ -282,6 +284,45 @@ export function NotionFilterGroup({
       )}
 
       <div className="space-y-2">
+        {/* Group header with NOT toggle for non-root groups */}
+        {!isRootGroup && (
+          <div className="flex items-center justify-between text-xs text-hn-orange pl-1">
+            {group.not ? (
+              <Tooltip.Root delayDuration={0}>
+                <Tooltip.Trigger asChild>
+                  <span className="capitalize tracking-wide bg-red-500 text-white px-1 py-0.5 cursor-help">
+                    not
+                  </span>
+                </Tooltip.Trigger>
+                <Tooltip.Portal>
+                  <Tooltip.Content
+                    className="px-2 py-1 text-xs bg-gray-900 text-white rounded shadow-lg"
+                    sideOffset={5}
+                  >
+                    NOT inverts all conditions in this group. Only operators
+                    with a supported negation are allowed; unsupported ones will
+                    show an error and block Apply.
+                    <Tooltip.Arrow className="fill-gray-900" />
+                  </Tooltip.Content>
+                </Tooltip.Portal>
+              </Tooltip.Root>
+            ) : (
+              <span />
+            )}
+
+            <label className="inline-flex items-center gap-2 cursor-pointer">
+              <span className="text-[11px]">is not</span>
+              <input
+                type="checkbox"
+                className="h-3 w-3 accent-hn-orange"
+                checked={Boolean(group.not)}
+                onChange={() => onToggleNot(path)}
+                aria-label="Toggle NOT for this group"
+              />
+            </label>
+          </div>
+        )}
+
         {group.nodes.map((item, index) => {
           const childPath = [...path, index]
 
@@ -311,6 +352,7 @@ export function NotionFilterGroup({
                   // indexInGroup={index}
                   // groupOperator={group.operator}
                   onToggleOperator={onToggleOperator}
+                  onToggleNot={onToggleNot}
                   onAddFilter={onAddFilter}
                   onAddFilterClick={onAddFilterClick}
                   onAddGroupClick={onAddGroupClick}

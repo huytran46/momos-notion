@@ -100,10 +100,12 @@ type NotionFilterConfigPopoverProps = {
   columnDefs: ColumnDef<Record<string, unknown>>[]
   maxNestingDepth: number
   hasUnsavedChanges?: boolean
+  notValidationError?: string | null
   onMaxNestingDepthChange: (depth: number) => void
   onAddFilter: (rule: FilterRule) => void
   onRemoveFilter: (path: number[]) => void
   onToggleGroupOperator: (path: number[]) => void
+  onToggleGroupNot: (path: number[]) => void
   onAddGroup: (operator: "and" | "or") => void
   onAddFilterToGroup: (path: number[], rule: FilterRule) => void
   onAddGroupToPath: (path: number[], operator: "and" | "or") => void
@@ -118,10 +120,12 @@ export function NotionFilterConfigPopover({
   columnDefs,
   maxNestingDepth,
   hasUnsavedChanges = false,
+  notValidationError,
   onMaxNestingDepthChange,
   onAddFilter,
   onRemoveFilter,
   onToggleGroupOperator,
+  onToggleGroupNot,
   onAddGroup,
   onAddFilterToGroup,
   onAddGroupToPath,
@@ -195,6 +199,7 @@ export function NotionFilterConfigPopover({
           maxNestingDepth={maxNestingDepth}
           path={path}
           onToggleOperator={onToggleGroupOperator}
+          onToggleNot={onToggleGroupNot}
           onAddFilter={onAddFilterToGroup}
           onAddFilterClick={handleAddFilterClick}
           onAddGroupClick={handleAddGroupClick}
@@ -283,6 +288,10 @@ export function NotionFilterConfigPopover({
               </div>
             )}
 
+            {notValidationError && (
+              <div className="text-xs text-red-600">{notValidationError}</div>
+            )}
+
             <div className="space-y-2 border-t border-hn-border pt-3">
               <div className="flex gap-2">
                 <AddFilterDropdown
@@ -302,7 +311,11 @@ export function NotionFilterConfigPopover({
                 <button
                   type="button"
                   onClick={onApplyFilters}
-                  disabled={!hasUnsavedChanges || !filters}
+                  disabled={
+                    !hasUnsavedChanges ||
+                    !filters ||
+                    Boolean(notValidationError)
+                  }
                   className="px-3 py-1 text-sm border border-hn-orange bg-hn-orange text-white hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Apply

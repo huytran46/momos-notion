@@ -4,7 +4,7 @@ import { useInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query"
 import { Suspense, useMemo, useState } from "react"
 import {
   type CompoundFilter,
-  FilterRule,
+  type FilterRule,
   NotionFilterConfigPopover,
   useFilterState,
 } from "@/features/notion-filters"
@@ -39,10 +39,12 @@ function NotionDatasourceLoader({
   filtersDraft,
   maxNestingDepth,
   hasUnsavedChanges,
+  notValidationError,
   onMaxNestingDepthChange,
   onAddFilter,
   onRemoveFilter,
   onToggleGroupOperator,
+  onToggleGroupNot,
   onAddGroup,
   onAddFilterToGroup,
   onAddGroupToPath,
@@ -67,10 +69,12 @@ function NotionDatasourceLoader({
   filtersDraft: CompoundFilter
   maxNestingDepth: number
   hasUnsavedChanges: boolean
+  notValidationError?: string | null
   onMaxNestingDepthChange: (depth: number) => void
   onAddFilter: (rule: FilterRule) => void
   onRemoveFilter: (path: number[]) => void
   onToggleGroupOperator: (path: number[]) => void
+  onToggleGroupNot: (path: number[]) => void
   onAddGroup: (operator: "and" | "or") => void
   onAddFilterToGroup: (path: number[], rule: FilterRule) => void
   onAddGroupToPath: (path: number[], operator: "and" | "or") => void
@@ -151,10 +155,12 @@ function NotionDatasourceLoader({
             filters={filtersDraft}
             maxNestingDepth={maxNestingDepth}
             hasUnsavedChanges={hasUnsavedChanges}
+            notValidationError={notValidationError}
             onMaxNestingDepthChange={onMaxNestingDepthChange}
             onAddFilter={onAddFilter}
             onRemoveFilter={onRemoveFilter}
             onToggleGroupOperator={onToggleGroupOperator}
+            onToggleGroupNot={onToggleGroupNot}
             onAddGroup={onAddGroup}
             onAddFilterToGroup={onAddFilterToGroup}
             onAddGroupToPath={onAddGroupToPath}
@@ -227,6 +233,64 @@ function NotionDatasourceLoader({
   )
 }
 
+type NotionKeyDemoCalloutProps = {
+  onDismiss: () => void
+}
+
+function NotionKeyDemoCallout({ onDismiss }: NotionKeyDemoCalloutProps) {
+  return (
+    <div className="mb-3 flex items-start gap-3 rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+      <div className="flex-1">
+        For demo purposes, the Notion key is entered manually here. In a real
+        app it should be kept secret and never exposed in the client.
+      </div>
+      <button
+        type="button"
+        onClick={onDismiss}
+        className="text-xs text-amber-900 underline whitespace-nowrap"
+        aria-label="Dismiss demo callout"
+      >
+        Dismiss
+      </button>
+    </div>
+  )
+}
+
+function SupportedPropertyTypesCallout() {
+  return (
+    <div className="mt-2 text-xs text-hn-text-secondary">
+      Currently, we only support these property types:{" "}
+      <span className="ml-1 inline-flex flex-wrap gap-1">
+        <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+          checkbox
+        </span>
+        <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+          date
+        </span>
+        <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+          multi_select
+        </span>
+        <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+          number
+        </span>
+        <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+          rich_text
+        </span>
+        <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+          select
+        </span>
+        <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+          timestamp
+        </span>
+        <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
+          status
+        </span>
+      </span>
+      .
+    </div>
+  )
+}
+
 const DEFAULT_COMPOUND_FILTER_MAX_NESTING_DEPTH = 2
 
 export function NotionDatasourceViewer({
@@ -262,20 +326,7 @@ export function NotionDatasourceViewer({
   return (
     <>
       {showKeyCallout && (
-        <div className="mb-3 flex items-start gap-3 rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
-          <div className="flex-1">
-            For demo purposes, the Notion key is entered manually here. In a
-            real app it should be kept secret and never exposed in the client.
-          </div>
-          <button
-            type="button"
-            onClick={() => setShowKeyCallout(false)}
-            className="text-xs text-amber-900 underline whitespace-nowrap"
-            aria-label="Dismiss demo callout"
-          >
-            Dismiss
-          </button>
-        </div>
+        <NotionKeyDemoCallout onDismiss={() => setShowKeyCallout(false)} />
       )}
 
       {/* Datasource Selection */}
@@ -285,36 +336,7 @@ export function NotionDatasourceViewer({
         onSubmit={handleSubmit}
       />
 
-      <div className="mt-2 text-xs text-hn-text-secondary">
-        Currently, we only support these property types:{" "}
-        <span className="ml-1 inline-flex flex-wrap gap-1">
-          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
-            checkbox
-          </span>
-          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
-            date
-          </span>
-          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
-            multi_select
-          </span>
-          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
-            number
-          </span>
-          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
-            rich_text
-          </span>
-          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
-            select
-          </span>
-          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
-            timestamp
-          </span>
-          <span className="rounded border border-red-200 bg-white px-1.5 py-0.5 font-mono text-[11px] text-red-500">
-            status
-          </span>
-        </span>
-        .
-      </div>
+      <SupportedPropertyTypesCallout />
 
       <hr className="my-4 border-hn-border" />
 
@@ -343,10 +365,12 @@ export function NotionDatasourceViewer({
             filtersDraft={filters.draftFilters}
             maxNestingDepth={filters.maxNestingDepth}
             hasUnsavedChanges={filters.hasUnsavedChanges}
+            notValidationError={filters.notValidationError}
             onMaxNestingDepthChange={filters.handleMaxNestingDepthChange}
             onAddFilter={filters.handleAddFilter}
             onRemoveFilter={filters.handleRemoveFilter}
             onToggleGroupOperator={filters.handleToggleGroupOperator}
+            onToggleGroupNot={filters.handleToggleGroupNot}
             onAddGroup={filters.handleAddGroup}
             onAddFilterToGroup={filters.handleAddFilterToGroup}
             onAddGroupToPath={filters.handleAddGroupToPath}

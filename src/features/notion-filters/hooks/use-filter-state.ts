@@ -1,11 +1,15 @@
 import { useControllableState } from "@radix-ui/react-use-controllable-state"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import type {
   CompoundFilter,
   FilterGroupOperator,
   FilterRule,
 } from "@/features/notion-filters/types/notion-filters"
 import * as NotionFilters from "@/features/notion-filters/utils/compound-filter"
+import {
+  normalizeNotInFilterTree,
+  validateFilterTreeForNot,
+} from "@/features/notion-filters/utils/notion-filter-logical-negation"
 
 export function useFilterState({
   filters: filtersProp,
@@ -34,6 +38,27 @@ export function useFilterState({
   const [appliedFilters, setAppliedFilters] =
     useState<CompoundFilter>(defaultFilters)
 
+  const [notValidationError, setNotValidationError] = useState<string | null>(
+    null
+  )
+
+  // Recompute NOT validation on draft changes to surface UX feedback early.
+  useEffect(() => {
+    if (!draftFilters) {
+      setNotValidationError(null)
+      return
+    }
+    const validation = validateFilterTreeForNot(draftFilters)
+    if (!validation.supported && validation.unsupportedOperators.size > 0) {
+      const operatorsList = Array.from(validation.unsupportedOperators).join(
+        ", "
+      )
+      setNotValidationError(`Unsupported conditions for NOT: ${operatorsList}`)
+    } else {
+      setNotValidationError(null)
+    }
+  }, [draftFilters])
+
   // Business logic operations - all guards are in the business layer
   const handleAddFilter = useCallback(
     (rule: FilterRule) => {
@@ -52,6 +77,13 @@ export function useFilterState({
   const handleToggleGroupOperator = useCallback(
     (path: number[]) => {
       setDraftFilters((prev) => NotionFilters.toggleGroupOperator(prev, path))
+    },
+    [setDraftFilters]
+  )
+
+  const handleToggleGroupNot = useCallback(
+    (path: number[]) => {
+      setDraftFilters((prev) => NotionFilters.toggleGroupNot(prev, path))
     },
     [setDraftFilters]
   )
@@ -101,6 +133,25 @@ export function useFilterState({
   }, [setDraftFilters])
 
   const handleApplyFilters = useCallback(() => {
+    // Validate NOT usage and normalize before applying
+    if (draftFilters) {
+      const validation = validateFilterTreeForNot(draftFilters)
+      if (!validation.supported && validation.unsupportedOperators.size > 0) {
+        const operatorsList = Array.from(validation.unsupportedOperators).join(
+          ", "
+        )
+        setNotValidationError(
+          `Unsupported conditions for NOT: ${operatorsList}`
+        )
+        return
+      }
+      setNotValidationError(null)
+      const normalized = normalizeNotInFilterTree(draftFilters)
+      setAppliedFilters(normalized)
+      return
+    }
+
+    setNotValidationError(null)
     setAppliedFilters(draftFilters)
   }, [draftFilters])
 
@@ -127,9 +178,11 @@ export function useFilterState({
     appliedFilters,
     maxNestingDepth,
     hasUnsavedChanges,
+    notValidationError,
     handleAddFilter,
     handleRemoveFilter,
     handleToggleGroupOperator,
+    handleToggleGroupNot,
     handleAddGroup,
     handleAddFilterToGroup,
     handleAddGroupToPath,

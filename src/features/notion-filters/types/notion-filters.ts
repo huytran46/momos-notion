@@ -130,6 +130,12 @@ export type FilterGroup = {
   type: "group"
   operator: FilterGroupOperator
   nodes: FilterNode[]
+  /**
+   * Optional logical NOT applied to this group:
+   * - NOT (A AND B) or NOT (A OR B)
+   * Handled in business logic / conversion layer, not in UI components.
+   */
+  not?: boolean
 }
 
 // Filter node (can be a rule or a group - recursive type)

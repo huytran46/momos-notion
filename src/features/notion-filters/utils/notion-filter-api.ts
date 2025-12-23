@@ -14,6 +14,7 @@ import type {
   PropertyFilterRule,
 } from "@/features/notion-filters/types/notion-filters"
 import { isTimestampType } from "@/features/notion-filters/types/notion-filters"
+import { normalizeNotInFilterTree } from "@/features/notion-filters/utils/notion-filter-logical-negation"
 
 // ============================================================================
 // FILTER CONVERSION TO NOTION API FORMAT
@@ -110,7 +111,12 @@ export function convertToNotionApiFormat(
     return undefined
   }
 
-  return convertFilterNode(clientFilter, 0, 2)
+  // First, normalize any NOT groups into an equivalent structure that uses
+  // only AND/OR and supported negated operators. This will throw a descriptive
+  // error if unsupported operators are used with NOT.
+  const normalized = normalizeNotInFilterTree(clientFilter)
+
+  return convertFilterNode(normalized as FilterNode, 0, 2)
 }
 
 // ----------------------------------------------------------------------------

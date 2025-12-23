@@ -421,7 +421,7 @@ export function NotionFilterRule({
               <Select.Trigger className="inline-flex items-center justify-between">
                 <Select.Value
                   placeholder="Select operator"
-                  className="flex-1 min-w-0 data-placeholder:text-hn-text-secondary"
+                  className="flex-1 min-w-0 whitespace-nowrap data-placeholder:text-hn-text-secondary"
                 />
                 <Select.Icon />
               </Select.Trigger>
@@ -435,7 +435,7 @@ export function NotionFilterRule({
                         value={operator}
                         className="px-2 py-1 text-sm hover:bg-hn-hover text-hn-text cursor-pointer"
                       >
-                        <Select.ItemText>
+                        <Select.ItemText className="whitespace-nowrap">
                           {formatOperatorLabel(operator)}
                         </Select.ItemText>
                       </Select.Item>
