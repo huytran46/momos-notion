@@ -157,7 +157,7 @@ describe("compound-filter", () => {
     describe("Workflow 1: Simple Task Filtering", () => {
       it("should build filters incrementally from empty state", () => {
         // Start with empty state
-        let filter: CompoundFilter = undefined
+        let filter: CompoundFilter
 
         // Add first filter: Status = 'In Progress'
         const statusFilter = createStatusFilter(
@@ -217,7 +217,7 @@ describe("compound-filter", () => {
 
     describe("Workflow 2: E-commerce Product Filtering (Compound Filters)", () => {
       it("should build complex nested filter structure", () => {
-        let filter: CompoundFilter = undefined
+        let filter: CompoundFilter
 
         // Build: (Price > 100 AND Category = 'Electronics') OR (In Stock = true AND Rating >= 4)
         const priceFilter = createNumberFilter("Price", "greater_than", 100)
@@ -269,7 +269,7 @@ describe("compound-filter", () => {
       })
 
       it("should enforce max depth when building nested filters", () => {
-        let filter: CompoundFilter = undefined
+        let filter: CompoundFilter
 
         // Create root group (depth 1)
         filter = NotionFilters.addGroup(filter, "and")
@@ -293,7 +293,7 @@ describe("compound-filter", () => {
 
     describe("Workflow 3: Project Management (Date & Timestamp)", () => {
       it("should build filter with date and timestamp properties", () => {
-        let filter: CompoundFilter = undefined
+        let filter: CompoundFilter
 
         // Due Date < '2024-12-31'
         const dueDateFilter = createDateFilter(
@@ -350,7 +350,7 @@ describe("compound-filter", () => {
 
     describe("Workflow 4: Content Management (Text & Multi-select)", () => {
       it("should build filter with text search and tags", () => {
-        let filter: CompoundFilter = undefined
+        let filter: CompoundFilter
 
         // Title contains 'React'
         const titleFilter1 = createRichTextFilter("Title", "contains", "React")
@@ -1106,7 +1106,7 @@ describe("compound-filter", () => {
       })
 
       it("should allow adding group when within max depth", () => {
-        let filter = NotionFilters.addGroup(undefined, "and")
+        const filter = NotionFilters.addGroup(undefined, "and")
         const canAdd = NotionFilters.canAddNestedGroupAtPath(filter, [0], 2)
         expect(canAdd).toBe(true)
       })
@@ -1407,7 +1407,7 @@ describe("compound-filter", () => {
         const rule1 = createTestFilterRule({ property: "A" })
         const rule2 = createTestFilterRule({ property: "B" })
         let draft = NotionFilters.addFilter(rule1, rule2)
-        let applied = NotionFilters.addFilter(rule1, rule2)
+        const applied = NotionFilters.addFilter(rule1, rule2)
 
         // They should be equal
         expect(NotionFilters.hasUnsavedChanges(draft, applied)).toBe(false)
